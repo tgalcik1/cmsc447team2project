@@ -19,16 +19,17 @@ def main():
 
 def parseCSV(filePath):
       # CVS Column Names
-      col_names = ['first_name','last_name','address', 'street', 'state' , 'zip']
+      col_names = ['OBJECTID','DATE','Baltimore', 'Baltimore_CITY']
       # Use Pandas to parse the CSV file
       csvData = pd.read_csv(filePath,names=col_names, header=None)
       # Loop through the Rows
       for i,row in csvData.iterrows():
-             sql = "INSERT INTO addresses (first_name, last_name, address, street, state, zip) VALUES (%s, %s, %s, %s, %s, %s)"
-             value = (row['first_name'],row['last_name'],row['address'],row['street'],row['state'],str(row['zip']))
+             sql = "INSERT INTO addresses (OBJECTID, DATE, Baltimore, Baltimore_CITY) VALUES (%s, %s, %s, %s)"
+             value = (row['OBJECTID'],row['DATE'],row['Baltimore'],row['Baltimore_CITY'])
              mycursor.execute(sql, value, if_exists='append')
              mydb.commit()
-             print(i,row['first_name'],row['last_name'],row['address'],row['street'],row['state'],row['zip'])
+             print(i,row['OBJECTID'],row['DATE'],row['Baltimore'],row['Baltimore_CITY'])
+
 
 if __name__=="__main__":
     main()
