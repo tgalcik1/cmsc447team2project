@@ -17,7 +17,7 @@ def main():
     app.run(host='localhost', port=5000)
 
 
-def parseCSV(filePath):
+def parseCSV_covidcases(filePath):
       # CVS Column Names
       col_names = ['OBJECTID','DATE','Baltimore', 'Baltimore_CITY']
       # Use Pandas to parse the CSV file
