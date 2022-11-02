@@ -38,17 +38,20 @@ def uploadFiles():
     return redirect(url_for('index'))
 
 def parseCSV_covidcases(filePath):
-      # CVS Column Names
-      col_names = ['OBJECTID','DATE','Baltimore', 'Baltimore_CITY']
-      # Use Pandas to parse the CSV file
-      csvData = pd.read_csv(filePath,names=col_names, header=None)
-      # Loop through the Rows
-      for i,row in csvData.iterrows():
-             sql = "INSERT INTO addresses (OBJECTID, DATE, Baltimore, Baltimore_CITY) VALUES (%s, %s, %s, %s)"
-             value = (row['OBJECTID'],row['DATE'],row['Baltimore'],row['Baltimore_CITY'])
-             mycursor.execute(sql, value, if_exists='append')
-             mydb.commit()
-             print(i,row['OBJECTID'],row['DATE'],row['Baltimore'],row['Baltimore_CITY'])
+    mycursor.execute("CREATE TABLE COVIDcases (OBJECTID VARCHAR(255), DATE VARCHAR(255), Baltimore VARCHAR(255), Baltimore_CITY VARCHAR(255))")
+    # CVS Column Names
+    col_names = ['OBJECTID','DATE', 'Allegany', 'Anne_Arundel', 'Baltimore', 'Baltimore_CITY', 'Calvert', 'Caroline',
+                 'Carroll', 'Cecil', 'Charles', 'Dorcheste', 'Fredick', 'Garret', 'Harford', 'Kent', 'Montgomery',
+                 'Prince_Georges', 'Queen_Annes', 'Somerset', 'St_Marys', 'talbot', 'Washington', 'Wicomico', 'Worcester', 'Unknown']
+    # Use Pandas to parse the CSV file
+    csvData = pd.read_csv(filePath,names=col_names, header=None)
+    csvData = csvData.where((pd.notnull(csvData)), None)
+    # Loop through the Rows
+    for i,row in csvData.iterrows():
+        sql = "INSERT INTO addresses (OBJECTID, DATE, Baltimore, Baltimore_CITY) VALUES (%s, %s, %s, %s)"
+        value = (row['OBJECTID'],row['DATE'],row['Baltimore'],row['Baltimore_CITY'])
+        mycursor.execute(sql, value)
+        mydb.commit()
 
 def parseCSV_crime(filePath):
     mycursor.execute("CREATE TABLE crimedata (X VARCHAR(255), Y VARCHAR(255), RowID VARCHAR(255), CrimeCode VARCHAR(255), Location VARCHAR(255), \
@@ -75,7 +78,8 @@ def parseCSV_crime(filePath):
 
 
 def main():
-    parseCSV_crime(r"C:\Users\lukec\Desktop\Part_1_Crime_Data_.csv")
+    parseCSV_crime(r"C:\Users\rober\Downloads\Part_1_Crime_Data_.csv")
+    #parseCSV_covidcases(r"C:\Users\rober\Downloads\MDCOVID19_CasesByCounty.csv")
     app.run(host='localhost', port=5000)
 
 if __name__=="__main__":
