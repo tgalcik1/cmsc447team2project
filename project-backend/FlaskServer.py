@@ -41,13 +41,17 @@ def parseCSV_covidcases(filePath):
     mycursor.execute("CREATE TABLE COVIDcases (OBJECTID VARCHAR(255), DATE VARCHAR(255), Baltimore VARCHAR(255), Baltimore_CITY VARCHAR(255))")
     # CVS Column Names
     col_names = ['OBJECTID','DATE', 'Allegany', 'Anne_Arundel', 'Baltimore', 'Baltimore_CITY', 'Calvert', 'Caroline',
-                 'Carroll', 'Cecil', 'Charles', 'Dorcheste', 'Fredick', 'Garret', 'Harford', 'Kent', 'Montgomery',
+                 'Carroll', 'Cecil', 'Charles', 'Dorcheste', 'Fredick', 'Garret', 'Harford','Howard', 'Kent', 'Montgomery',
                  'Prince_Georges', 'Queen_Annes', 'Somerset', 'St_Marys', 'talbot', 'Washington', 'Wicomico', 'Worcester', 'Unknown']
     # Use Pandas to parse the CSV file
+    col_needed = ['OBJECTID', 'DATE', 'Baltimore', 'Baltimore_CITY']
     csvData = pd.read_csv(filePath,names=col_names, header=None)
     csvData = csvData.where((pd.notnull(csvData)), None)
+    csvDataParse = csvData.iloc[1:, [0,1,4,5]]
+
+    print(csvDataParse)
     # Loop through the Rows
-    for i,row in csvData.iterrows():
+    for i,row in csvDataParse.iterrows():
         sql = "INSERT INTO addresses (OBJECTID, DATE, Baltimore, Baltimore_CITY) VALUES (%s, %s, %s, %s)"
         value = (row['OBJECTID'],row['DATE'],row['Baltimore'],row['Baltimore_CITY'])
         mycursor.execute(sql, value)
@@ -78,8 +82,8 @@ def parseCSV_crime(filePath):
 
 
 def main():
-    parseCSV_crime(r"C:\Users\rober\Downloads\Part_1_Crime_Data_.csv")
-    #parseCSV_covidcases(r"C:\Users\rober\Downloads\MDCOVID19_CasesByCounty.csv")
+   # parseCSV_crime(r"C:\Users\rober\Downloads\Part_1_Crime_Data_.csv")
+    parseCSV_covidcases(r"C:\Users\rober\Downloads\MDCOVID19_CasesByCounty.csv")
     app.run(host='localhost', port=5000)
 
 if __name__=="__main__":
