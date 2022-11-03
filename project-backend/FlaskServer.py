@@ -48,6 +48,11 @@ def parseCSV_covidcases(filePath):
     csvData = pd.read_csv(filePath,names=col_names, header=None)
     csvData = csvData.where((pd.notnull(csvData)), None)
     csvDataParse = csvData.iloc[1:, [0,1,4,5]]
+<<<<<<< HEAD
+=======
+    print(csvData)
+    print(csvDataParse)
+>>>>>>> e3c7aa94919e1a9c02106f78f076ad03656e235d
     # Loop through the Rows
     for i,row in csvDataParse.iterrows():
         sql = "INSERT INTO COVIDcases (OBJECTID, DATE, Baltimore, Baltimore_CITY) VALUES (%s, %s, %s, %s)"
@@ -67,6 +72,7 @@ def parseCSV_crime(filePath):
     # Use Pandas to parse the CSV file
     csvData = pd.read_csv(filePath,names=col_names, header=None)
     csvData = csvData.where((pd.notnull(csvData)), None)
+    print(csvData)
     # Loop through the Rows
     for i,row in csvData.iterrows():
             sql = "INSERT INTO crimedata (X, Y, RowID, CrimeCode, Location, Description, Inside_Outside, Weapon,\
@@ -80,8 +86,13 @@ def parseCSV_crime(filePath):
 
 
 def main():
+<<<<<<< HEAD
    # parseCSV_crime(r"C:\Users\rober\Downloads\Part_1_Crime_Data_.csv")
     parseCSV_covidcases(r"C:\Users\lukec\Desktop\MDCOVID19_CasesByCounty.csv")
+=======
+   #parseCSV_crime(r"C:\Users\rober\Downloads\Part_1_Crime_Data_.csv")
+    parseCSV_covidcases(r"C:\Users\rober\Downloads\MDCOVID19_CasesByCounty.csv")
+>>>>>>> e3c7aa94919e1a9c02106f78f076ad03656e235d
     app.run(host='localhost', port=5000)
 
 if __name__=="__main__":
