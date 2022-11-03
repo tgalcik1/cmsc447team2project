@@ -48,11 +48,9 @@ def parseCSV_covidcases(filePath):
     csvData = pd.read_csv(filePath,names=col_names, header=None)
     csvData = csvData.where((pd.notnull(csvData)), None)
     csvDataParse = csvData.iloc[1:, [0,1,4,5]]
-
-    print(csvDataParse)
     # Loop through the Rows
     for i,row in csvDataParse.iterrows():
-        sql = "INSERT INTO addresses (OBJECTID, DATE, Baltimore, Baltimore_CITY) VALUES (%s, %s, %s, %s)"
+        sql = "INSERT INTO COVIDcases (OBJECTID, DATE, Baltimore, Baltimore_CITY) VALUES (%s, %s, %s, %s)"
         value = (row['OBJECTID'],row['DATE'],row['Baltimore'],row['Baltimore_CITY'])
         mycursor.execute(sql, value)
         mydb.commit()
@@ -83,7 +81,7 @@ def parseCSV_crime(filePath):
 
 def main():
    # parseCSV_crime(r"C:\Users\rober\Downloads\Part_1_Crime_Data_.csv")
-    parseCSV_covidcases(r"C:\Users\rober\Downloads\MDCOVID19_CasesByCounty.csv")
+    parseCSV_covidcases(r"C:\Users\lukec\Desktop\MDCOVID19_CasesByCounty.csv")
     app.run(host='localhost', port=5000)
 
 if __name__=="__main__":
