@@ -40,6 +40,7 @@ mysql = MySQL(app)
 db = SQLAlchemy(app)
 ma  = Marshmallow(app)
 
+#---------------------------------------------------------------------------------------
 class CovidCases(db.Model):
     __tablename__ = 'covidcases'
     __table_args__ = {'extend_existing': True} 
@@ -62,11 +63,43 @@ covidcase_schema = CovidCaseSchema()
 covidcases_schema = CovidCaseSchema(many=True)
 
 @app.route('/covidcases', methods = ['GET'])
-def get_instructor():
+def get_covidcases():
     all_covidcases = CovidCases.query.all()
     results = covidcases_schema.dump(all_covidcases)
     return jsonify(results)
 
+#---------------------------------------------------------------------------------------
+class CovidDeaths(db.Model):
+    __tablename__ = 'coviddeaths'
+    __table_args__ = {'extend_existing': True} 
+    OBJECTID = db.Column(db.String(250), primary_key=True)
+    DATE = db.Column(db.String(100))
+    Baltimore = db.Column(db.String(100))
+    Baltimore_CITY = db.Column(db.String(100))
+
+    def __init__(self, OBJECTID, DATE, Baltimore, Baltimore_CITY):
+        self.OBJECTID  = OBJECTID
+        self.DATE = DATE
+        self.Baltimore = Baltimore
+        self.Baltimore_CITY = Baltimore_CITY
+        
+class CovidDeathSchema(ma.Schema):
+    class Meta: 
+        fields = ('OBJECTID', 'DATE', 'Baltimore', 'Baltimore_CITY')
+
+coviddeath_schema = CovidDeathSchema()
+coviddeaths_schema = CovidDeathSchema(many=True)
+
+@app.route('/coviddeaths', methods = ['GET'])
+def get_coviddeaths():
+    all_coviddeaths = CovidDeaths.query.all()
+    results = coviddeaths_schema.dump(all_coviddeaths)
+    return jsonify(results)
+
+
+
+
+#---------------------------------------------------------------------------------------
 @app.route('/', methods =["GET", "POST"])
 def defaultpage():
     return render_template('index.html')
@@ -153,6 +186,7 @@ def main():
     #parseCSV_coviddeaths(r"C:\Users\lukec\Desktop\MDCOVID19_ConfirmedDeathsByCounty.csv")
     #parseCSV_crime(r"C:\Users\lukec\Desktop\Part_1_Crime_Data_.csv")
     #parseCSV_covidcases(r"C:\Users\rober\Downloads\MDCOVID19_CasesByCounty.csv")
+    parseCSV_coviddeaths(r"C:\Users\rober\Downloads\MDCOVID19_ConfirmedDeathsByCounty.csv")
     app.run(host='localhost', port=5000)
 
 if __name__=="__main__":
