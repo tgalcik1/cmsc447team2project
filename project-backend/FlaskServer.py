@@ -1,3 +1,6 @@
+from re import T
+from tkinter import N
+from turtle import Shape
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
@@ -100,6 +103,79 @@ def get_coviddeaths():
 
 
 #---------------------------------------------------------------------------------------
+class CrimeData(db.Model):
+    __tablename__ = 'crimedata'
+    __table_args__ = {'extend_existing': True} 
+    X = db.Column(db.String(250))
+    Y = db.Column(db.String(100))
+    RowID = db.Column(db.String(100), primary_key=True)
+    CrimeDateTime = db.Column(db.String(100))
+    CrimeCode = db.Column(db.String(100))
+    Location= db.Column(db.String(100))
+    Description= db.Column(db.String(100))
+    Inside_Outside= db.Column(db.String(100))
+    Weapon= db.Column(db.String(100))
+    Post= db.Column(db.String(100))
+    Gender= db.Column(db.String(100))
+    Age= db.Column(db.String(100))
+    Race = db.Column(db.String(100))
+    Ethnicity= db.Column(db.String(100))
+    District= db.Column(db.String(100))
+    Neighborhood= db.Column(db.String(100))
+    Latitude= db.Column(db.String(100))
+    Longitude= db.Column(db.String(100))
+    GeoLocation= db.Column(db.String(100))
+    Premise= db.Column(db.String(100))
+    VRIName= db.Column(db.String(100))
+    Total_Incidents= db.Column(db.String(100))
+    Shape= db.Column(db.String(100))
+    
+    
+
+    def __init__(self, X, Y, RowID, CrimeDateTime, CrimeCode, Location, Description, Inside_Outside, Weapon,
+                Post, Gender, Age, Race, Ethnicity, District, Neighborhood, Latitude,
+                Longitude, GeoLocation, Premise, VRIName, Total_Incidents, Shape):
+        self.X  = X
+        self.Y = Y
+        self.RowID = RowID
+        self.CrimeDateTime = CrimeDateTime
+        self.CrimeCode = CrimeCode
+        self.Location = Location
+        self.Description = Description
+        self.Inside_Outside = Inside_Outside
+        self.Weapon = Weapon
+        self.Post = Post
+        self.Gender = Gender
+        self.Age = Age 
+        self.Race = Race
+        self.Ethnicity = Ethnicity
+        self.District = District
+        self.Neighborhood = Neighborhood
+        self.Latitude = Latitude
+        self.Longitude = Longitude
+        self.GeoLocation = GeoLocation
+        self.Premise = Premise
+        self.VRIName =VRIName
+        self.Total_Incidents = Total_Incidents
+        self.Shape = Shape 
+        
+class CrimeDataSchema(ma.Schema):
+    class Meta: 
+        fields = ('X','Y', 'RowID', 'CrimeDateTime', 'CrimeCode', 'Location', 'Description', 'Inside_Outside', 'Weapon',
+                'Post', 'Gender', 'Age', 'Race', 'Ethnicity', 'District', 'Neighborhood', 'Latitude',
+                'Longitude', 'GeoLocation', 'Premise', 'VRIName', 'Total_Incidents', 'Shape')
+
+crimedata_schema = CrimeDataSchema()
+crimedatas_schema = CrimeDataSchema(many=True)
+
+@app.route('/crimedata', methods = ['GET'])
+def get_crimedata():
+    all_crimedatas = CrimeData.query.all()
+    results = crimedatas_schema.dump(all_crimedatas)
+    return jsonify(results)
+
+
+#----------------------------------------------------------------------------------------
 @app.route('/', methods =["GET", "POST"])
 def defaultpage():
     return render_template('index.html')
@@ -186,7 +262,7 @@ def main():
     #parseCSV_coviddeaths(r"C:\Users\lukec\Desktop\MDCOVID19_ConfirmedDeathsByCounty.csv")
     #parseCSV_crime(r"C:\Users\lukec\Desktop\Part_1_Crime_Data_.csv")
     #parseCSV_covidcases(r"C:\Users\rober\Downloads\MDCOVID19_CasesByCounty.csv")
-    parseCSV_coviddeaths(r"C:\Users\rober\Downloads\MDCOVID19_ConfirmedDeathsByCounty.csv")
+    #parseCSV_coviddeaths(r"C:\Users\rober\Downloads\MDCOVID19_ConfirmedDeathsByCounty.csv")
     app.run(host='localhost', port=5000)
 
 if __name__=="__main__":
