@@ -5,6 +5,18 @@ import pandas as pd
 import mysql.connector
 import os
 from os.path import join, dirname, realpath
+#added some will delete not used
+from dataclasses import fields
+from flask import Flask;
+from flask import jsonify, request;
+from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
+from flask_cors import CORS
+from sqlalchemy import Column, ForeignKey, Integer, Table
+from sqlalchemy.orm import declarative_base, relationship
+import os
+from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 
 mydb = mysql.connector.connect(
   host="localhost",
@@ -19,8 +31,41 @@ cors = CORS(app)
 
 UPLOAD_FOLDER = 'static/files'
 app.config['UPLOAD_FOLDER'] =  UPLOAD_FOLDER
+#added under 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost/cmsc447project'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 mysql = MySQL(app)
+#added under 
+db = SQLAlchemy(app)
+ma  = Marshmallow(app)
+
+class CovidCases(db.Model):
+    __tablename__ = 'covidcases'
+    __table_args__ = {'extend_existing': True} 
+    OBJECTID = db.Column(db.String(250), primary_key=True)
+    DATE = db.Column(db.String(100))
+    Baltimore = db.Column(db.String(100))
+    Baltimore_CITY = db.Column(db.String(100))
+
+    def __init__(self, OBJECTID, DATE, Baltimore, Baltimore_CITY):
+        self.OBJECTID  = OBJECTID
+        self.DATE = DATE
+        self.Baltimore = Baltimore
+        self.Baltimore_CITY = Baltimore_CITY
+        
+class CovidCaseSchema(ma.Schema):
+    class Meta: 
+        fields = ('OBJECTID', 'DATE', 'Baltimore', 'Baltimore_CITY')
+
+covidcase_schema = CovidCaseSchema()
+covidcases_schema = CovidCaseSchema(many=True)
+
+@app.route('/covidcases', methods = ['GET'])
+def get_instructor():
+    all_covidcases = CovidCases.query.all()
+    results = covidcases_schema.dump(all_covidcases)
+    return jsonify(results)
 
 @app.route('/', methods =["GET", "POST"])
 def defaultpage():
@@ -36,6 +81,8 @@ def uploadFiles():
         uploaded_file.save(file_path)
         # save the file
     return redirect(url_for('index'))
+
+
 
 def parseCSV_covidcases(filePath):
     mycursor.execute("CREATE TABLE COVIDcases (OBJECTID VARCHAR(255), DATE VARCHAR(255), Baltimore VARCHAR(255), Baltimore_CITY VARCHAR(255))")
@@ -101,12 +148,13 @@ def parseCSV_crime(filePath):
 
 
 def main():
-   # parseCSV_crime(r"C:\Users\rober\Downloads\Part_1_Crime_Data_.csv")
+    #parseCSV_crime(r"C:\Users\rober\Downloads\Part_1_Crime_Data_.csv")
     #parseCSV_covidcases(r"C:\Users\lukec\Desktop\MDCOVID19_CasesByCounty.csv")
     #parseCSV_coviddeaths(r"C:\Users\lukec\Desktop\MDCOVID19_ConfirmedDeathsByCounty.csv")
-    parseCSV_crime(r"C:\Users\lukec\Desktop\Part_1_Crime_Data_.csv")
+    #parseCSV_crime(r"C:\Users\lukec\Desktop\Part_1_Crime_Data_.csv")
     #parseCSV_covidcases(r"C:\Users\rober\Downloads\MDCOVID19_CasesByCounty.csv")
     app.run(host='localhost', port=5000)
 
 if __name__=="__main__":
     main()
+    
