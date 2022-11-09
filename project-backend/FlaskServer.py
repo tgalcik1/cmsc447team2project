@@ -115,6 +115,7 @@ def uploadFiles():
         # save the file
     return redirect(url_for('index'))
 
+#Crime Routes
 class CrimeCases(db.model):
   __tablename__ = 'crimedata'
   __table_args__ = {'extend_existing': True} 
@@ -140,12 +141,26 @@ class CrimeCases(db.model):
 crimecase_schema = CrimeCasesSchema()
 crimecases_schema = CrimeCasesSchema(many=True)
 
-@app.route('/get',methods = ['GET'])
-def getCrimeData():
+@app.route('/getcrimecases',methods = ['GET'])
+def getCrimeCases():
   all_crimecases= CrimeCases.query.all()
   results = crimecases_schema.dump(all_crimecases)
   return jsonify(results)
 
+@app.route('/getcrimecase/<id>', methods =['GET'])
+def getCrimeCase(id):
+  crimecase = CrimeCases.query.get(id)
+  RowID = request.json['RowID']
+  CrimeDateTime = request.json['CrimeDateTime']
+  CrimeCode = request.json['CrimeCode']
+  Location = request.json['Location']
+  crimecase.RowID = RowID
+  crimecase.CrimeDateTime = CrimeDateTime
+  crimecase.CrimeCode = CrimeCode
+  crimecase.Location = Location
+  db.session.commit()
+  return crimecase_schema.jsonify(crimecase)
+  
 def parseCSV_covidcases(filePath):
     mycursor.execute("CREATE TABLE COVIDcases (OBJECTID VARCHAR(255), DATE VARCHAR(255), Baltimore VARCHAR(255), Baltimore_CITY VARCHAR(255))")
     # CVS Column Names
