@@ -191,14 +191,16 @@ def uploadFiles():
         # save the file
     return redirect(url_for('index'))
 
+#-------------------------------------------------------------------------------------------
+
 #Crime Routes
-class CrimeCases(db.model):
+class CrimeCases(db.Model):
   __tablename__ = 'crimedata'
   __table_args__ = {'extend_existing': True} 
   X = db.Column(db.Integer)
   Y = db.Column(db.Integer)
-  RowID = db.Column(db.Integer)
-  CrimeDateTime = db.Column(db.Integer, primary_key=True)
+  RowID = db.Column(db.Integer, primary_key=True)
+  CrimeDateTime = db.Column(db.Integer)
   CrimeCode = db.Column(db.Integer)
   Location = db.Column(db.String(250))
   
@@ -210,7 +212,7 @@ class CrimeCases(db.model):
     self.CrimeCode = CrimeCode
     self.Location = Location
     
- class CrimeCasesSchema(ma.Schema):
+class CrimeCasesSchema(ma.Schema):
   class Meta:
     fields = ('X', 'Y', 'RowID', 'CrimeDateTime', 'CrimeCode', 'Location')
     
@@ -237,6 +239,9 @@ def getCrimeCases():
 #   crimecase.Location = Location
 #   db.session.commit()
 #   return crimecase_schema.jsonify(crimecase)
+  
+ #-----------------------------------------------------------------------------------
+ 
   
 def parseCSV_covidcases(filePath):
     mycursor.execute("CREATE TABLE COVIDcases (OBJECTID VARCHAR(255), DATE VARCHAR(255), Baltimore VARCHAR(255), Baltimore_CITY VARCHAR(255))")
