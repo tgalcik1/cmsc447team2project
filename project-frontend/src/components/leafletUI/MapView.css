@@ -1,0 +1,186 @@
+body {
+    background: linear-gradient(359deg, #691225, #32427c, #1a1a1a, #1a1a1a) no-repeat center center fixed;
+    background-size: 200% 200%;
+    background-position: 0% 40%;
+    transition: ease-out background-position 300ms;
+    backdrop-filter: blur(1.5rem);
+  }
+
+  .leaflet-container {
+    height: 10%;
+  }
+
+  #map_wrapper {
+    top: 64px;
+    position: absolute;
+    padding: 20px;
+    width: 1220px;
+    border-radius: 10px;
+    background-color: rgba(37, 37, 42, 0.75);
+    box-shadow: 2px 8px 50px -3px rgb(0, 0, 0);
+  }
+
+  #map {
+    width: 100px;
+    height: 600px;
+    border: 3px solid white;
+    border-radius: 10px;
+  }
+
+  #crime_type{
+    position: absolute;
+    left: 10px;
+    top: 45px;
+    overflow-y: auto;
+    color: white;
+    height: 240px;
+    width: 150px;
+    background-color: rgba(37, 37, 42, 0.75);
+    font-size: 14px;
+    font-family: 'Karla', sans-serif;
+    text-shadow: 0px 1px 4px #000000;
+    font-weight: 900;
+  }
+
+  select[multiple]:focus, option:checked {
+    background: linear-gradient(45deg, #ff2a5f, #6b8dff, #1a1a1a, #1a1a1a);
+    background-size: 400% 400%;
+    transition: ease-out background 200ms;
+  }
+
+  select[multiple]:focus-within{
+    background: #fff;
+  }
+
+  #crime_type:hover{
+    transform: scale(1.02);
+    background-color: rgba(49, 49, 52, 0.47);
+    transition: ease-out transform 200ms;
+  }
+
+  .crime_type_dropdown{
+    position: absolute;
+    left:1054px;
+    top:165px;
+    float: right;
+    width: 150px;
+    height: 280px;
+    padding: 10px;
+    align-content: center;
+    border-radius: 15px;
+    background-color: rgba(25, 25, 28, 0.51);
+    box-shadow: 4px 4px #6b8dff;
+    text-align: center;
+  }
+
+  .crime_type_dropdown:hover{
+    transform: scale(1.02);
+    background-color: rgba(49, 49, 52, 0.47);
+    transition: ease-out transform 200ms;
+  }
+
+  .dateslider{
+    position: absolute;
+    left:1054px;
+    top:80px;
+    float: right;
+    width: 170px;
+    padding: 10px 0px 10px 0px;
+    border-radius: 15px;
+    background-color: rgba(25, 25, 28, 0.51);
+    box-shadow: 4px 4px #6b8dff;
+    text-align: center;
+  }
+
+  .dateslider:hover {
+    transform: scale(1.02);
+    background-color: rgba(49, 49, 52, 0.47);
+    transition: ease-out transform 200ms;
+  }
+
+  .slider {
+    width: 140px;
+    height: 20px;
+    background: linear-gradient(to right, #ff2a5f 0%, #ff2a5f 0%, #6b8dff 0%, #fff 0%, #fff 100%);
+    transition: background 450ms ease-in, all .2s ease-in-out;
+    -webkit-appearance: none;
+    border-radius: 25px;
+  }
+
+  .slider::-webkit-slider-thumb{
+    cursor: pointer;
+    appearance: none;
+    height: 25px;
+    width: 25px;
+    background-color: #6b8dff;
+    border-radius: 50%;
+    border: 3px solid rgb(255, 255, 255);
+  }
+
+  .slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    background-color: #9eb3ff;
+    transition: ease-out transform 200ms;
+  }
+
+  #date{
+    color: #fff;
+    font-size: 24px;
+    font-family: 'Karla', sans-serif;
+    text-shadow: 0px 1px 4px #000000;
+    font-weight: 900;
+  }
+
+  .text{
+    color: #fff;
+    font-size: 24px;
+    font-family: 'Karla', sans-serif;
+    text-shadow: 0px 1px 4px #000000;
+    font-weight: 900;
+  }
+
+  #filters{
+    position: absolute;
+    left:1054px;
+    top:20px;
+    width: 150px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: rgba(25, 25, 28, 0.51);
+    align-content: center;
+    text-align: center;
+    box-shadow: 4px 4px #6b8dff;
+  }
+
+  #header{
+    position: absolute;
+    width: 500px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: rgba(37, 37, 42, 0.72);
+    align-content: center;
+    text-align: center;
+  }
+
+  #header:hover{
+    transform: scale(1.02);
+    background-color: #3c3c41;
+    transition: ease-out transform 200ms;
+  }
+
+  #about{
+    position: absolute;
+    right: 10px;
+    width: 70px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: rgba(37, 37, 42, 0.72);
+    align-content: center;
+    text-align: center;
+  }
+
+  #about:hover{
+    transform: scale(1.05);
+    background-color: #3c3c41;
+    transition: ease-out transform 200ms;
+  }
