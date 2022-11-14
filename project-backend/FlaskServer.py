@@ -181,7 +181,7 @@ def get_crimedata():
     return jsonify(results)
 
 #---------------------------------------------------------------------------------------
-#filters only data for 2018 
+#filters only data for 2018
 @app.route('/crime2018', methods = ['GET'])
 def get_crimedata2018():
     first_date = '2018/01/01 13:40:00+00'
