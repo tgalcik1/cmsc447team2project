@@ -20,6 +20,12 @@ from sqlalchemy.orm import declarative_base, relationship
 import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+#
+from datetime import date, datetime, timedelta
+from faker import Faker 
+from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy 
+from sqlalchemy import func
 
 mydb = mysql.connector.connect(
   host="localhost",
@@ -110,7 +116,7 @@ class CrimeData(db.Model):
     Y = db.Column(db.String(100))
     RowID = db.Column(db.String(100), primary_key=True)
     CrimeDateTime = db.Column(db.String(100))
-    CrimeCode = db.Column(db.String(100))
+    CrimeCode = db.Column(db.DateTime())
     Location= db.Column(db.String(100))
     Description= db.Column(db.String(100))
     Inside_Outside= db.Column(db.String(100))
@@ -172,6 +178,16 @@ crimedatas_schema = CrimeDataSchema(many=True)
 def get_crimedata():
     all_crimedatas = CrimeData.query.all()
     results = crimedatas_schema.dump(all_crimedatas)
+    return jsonify(results)
+
+#---------------------------------------------------------------------------------------
+#filters only data for 2018
+@app.route('/crime2018', methods = ['GET'])
+def get_crimedata2018():
+    first_date = '2018/01/01 13:40:00+00'
+    last_date = '2018/12/31 13:40:00+00'
+    transactions = CrimeData.query.filter(CrimeData.CrimeDateTime.between(first_date, last_date)).all()
+    results = crimedatas_schema.dump(transactions)
     return jsonify(results)
 
 
