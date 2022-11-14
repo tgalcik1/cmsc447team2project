@@ -5,12 +5,12 @@ import { BrowserRouter as Router, Routes, Route}
 from 'react-router-dom';
 import About from './pages/about';
 import './App.css';
-import Mapview from './components/leafletUI/MapView';
+import MapView from './components/leafletUI/MapView';
 
 function App() {
   return (
     <div className="App">
-      <Mapview/>
+      <MapView/>
     </div>
   );
 }
