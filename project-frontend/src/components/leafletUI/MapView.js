@@ -1,14 +1,13 @@
-import React, { Component, useEffect, useState } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import React, { Component } from 'react';
+import { Map, TileLayer } from 'react-leaflet';
+import HeatmapLayer from 'react-leaflet-heatmap-layer';
 import 'leaflet/dist/leaflet.css';
-import "leaflet.heat";
-import L from 'leaflet';
-import crime_points_2018 from '../CrimeDataImports/crime_points_2018';
+import {crime_points_2018} from '../CrimeDataImports/crime_points_2018.js';
 import crime_points_2019 from '../CrimeDataImports/crime_points_2019';
 import crime_points_2020 from '../CrimeDataImports/crime_points_2020';
 import crime_points_2021 from '../CrimeDataImports/crime_points_2021';
 import crime_points_2022 from '../CrimeDataImports/crime_points_2022';
-
+/*
 function DisplayMap() {
   useEffect(() => {
     var map = L.map('map', {
@@ -42,7 +41,7 @@ function DisplayMap() {
       switch (this.value){
         case "2018":
           map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
           });
           current_layers.pop();
           current_layers.push(crime_2018);
@@ -51,7 +50,7 @@ function DisplayMap() {
           break;
         case "2019":
           map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
           });
           current_layers.pop();
           current_layers.push(crime_2019);
@@ -60,7 +59,7 @@ function DisplayMap() {
           break;
         case "2020":
           map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
           });
           current_layers.pop();
           current_layers.push(crime_2020);
@@ -69,7 +68,7 @@ function DisplayMap() {
           break;
         case "2021":
           map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
           });
           current_layers.pop();
           current_layers.push(crime_2021);
@@ -78,7 +77,7 @@ function DisplayMap() {
           break;
         case "2022":
           map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
           current_layers.pop();
           current_layers.push(crime_2022);
@@ -110,105 +109,109 @@ function DisplayMap() {
         switch (this.value) {
           case "agg_assault":
             map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
 
             agg_assault.addTo(map);
             break;
           case "arson":
             map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
 
             arson.addTo(map);
             break;
           case "auto_theft":
             map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
 
             auto_theft.addTo(map);
             break;
           case "burglary":
             map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
 
             burglary.addTo(map);
             break;
           case "common_assault":
             map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
 
             common_assault.addTo(map);
             break;
           case "homicide":
             map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
 
             homicide.addTo(map);
             break;
           case "larceny":
             map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
 
             larceny.addTo(map);
             break;
           case "larceny_from_auto":
             map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
 
             larceny_from_auto.addTo(map);
             break;
           case "rape":
             map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
 
             rape.addTo(map);
             break;
           case "robbery":
             map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
 
             robbery.addTo(map);
             break;
           case "robbery_carjacking":
             map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
 
             robbery_carjacking.addTo(map);
             break;
           case "robbery_commercial":
             map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
 
             robbery_commercial.addTo(map);
             break;
           case "shooting":
             map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
 
             shooting.addTo(map);
             break;
           default:
             map.eachLayer(function (layer) {
-              if (osmUrl != layer._url){map.removeLayer(layer)};
+              if (osmUrl !== layer._url){map.removeLayer(layer)};
             });
         }
     }
   }, []);
 }
+*/
+
+
 
 class MapView extends Component {
+  
   
   constructor(props) {
     super(props);
@@ -219,6 +222,7 @@ class MapView extends Component {
     }
   }
 
+  
   render() {
 
     return (
@@ -233,7 +237,7 @@ class MapView extends Component {
 
         <div id="map_wrapper">
         <div id="map">
-            <MapContainer center={{lat: 39.2904, lng: -76.6122}} zoom={13} style={{
+            <Map center={{lat: 39.2904, lng: -76.6122}} zoom={13} style={{
         height: 600 + "px",
         width: 1000 + "px",
       }}>
@@ -243,7 +247,15 @@ class MapView extends Component {
                   attribution="&copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors &copy; <a href=&quot;https://carto.com/attributions&quot;>CARTO</a>"
                   subdomains= 'abcd'
                 />
-              </MapContainer>
+                <HeatmapLayer
+          points={crime_points_2018}
+          longitudeExtractor={(m) => m[1]}
+          latitudeExtractor={(m) => m[0]}
+          intensityExtractor={(m) => .5}
+          radius={15}
+          blur={9}
+        />
+              </Map>
             </div>
           <div id="filters">
             <span className="text">Data Filters</span>
