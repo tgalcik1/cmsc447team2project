@@ -190,7 +190,37 @@ def get_crimedata2018():
     results = crimedatas_schema.dump(transactions)
     return jsonify(results)
 
+#filters crime data with neighbourhood as downtown
+@app.route('/downtown', methods = ['GET'])
+def get_downtown():
+    downtown = 'DOWNTOWN'
+    event = CrimeData.query.filter_by(Neighborhood=downtown)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
 
+#filters by gender, if gender = M
+@app.route('/male', methods = ['GET'])
+def get_male():
+    gender = 'M'
+    event = CrimeData.query.filter_by(Gender=gender)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+#filters by gender, if gender = F
+@app.route('/female', methods = ['GET'])
+def get_female():
+    gender = 'F'
+    event = CrimeData.query.filter_by(Gender=gender)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+    
+#filters by crime code 4E
+@app.route('/crime4E', methods = ['GET'])
+def get_code():
+    code = '4E'
+    event = CrimeData.query.filter_by(CrimeCode=code)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
 #----------------------------------------------------------------------------------------
 @app.route('/', methods =["GET", "POST"])
 def defaultpage():
