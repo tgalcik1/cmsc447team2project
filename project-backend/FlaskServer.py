@@ -190,7 +190,73 @@ def get_crimedata2018():
     results = crimedatas_schema.dump(transactions)
     return jsonify(results)
 
+#filters only data for 2019
+@app.route('/crime2019', methods = ['GET'])
+def get_crimedata2018():
+    first_date = '2019/01/01 13:40:00+00'
+    last_date = '2019/12/31 13:40:00+00'
+    transactions = CrimeData.query.filter(CrimeData.CrimeDateTime.between(first_date, last_date)).all()
+    results = crimedatas_schema.dump(transactions)
+    return jsonify(results)
 
+#filters only data for 2020
+@app.route('/crime2020', methods = ['GET'])
+def get_crimedata2018():
+    first_date = '2020/01/01 13:40:00+00'
+    last_date = '2020/12/31 13:40:00+00'
+    transactions = CrimeData.query.filter(CrimeData.CrimeDateTime.between(first_date, last_date)).all()
+    results = crimedatas_schema.dump(transactions)
+    return jsonify(results)
+
+#filters only data for 2021
+@app.route('/crime2021', methods = ['GET'])
+def get_crimedata2018():
+    first_date = '2021/01/01 13:40:00+00'
+    last_date = '2021/12/31 13:40:00+00'
+    transactions = CrimeData.query.filter(CrimeData.CrimeDateTime.between(first_date, last_date)).all()
+    results = crimedatas_schema.dump(transactions)
+    return jsonify(results)
+
+#filters only data for 2020
+@app.route('/crime2022', methods = ['GET'])
+def get_crimedata2018():
+    first_date = '2022/01/01 13:40:00+00'
+    last_date = '2022/12/31 13:40:00+00'
+    transactions = CrimeData.query.filter(CrimeData.CrimeDateTime.between(first_date, last_date)).all()
+    results = crimedatas_schema.dump(transactions)
+    return jsonify(results)
+
+#filters crime data with neighbourhood as downtown
+@app.route('/downtown', methods = ['GET'])
+def get_downtown():
+    downtown = 'DOWNTOWN'
+    event = CrimeData.query.filter_by(Neighborhood=downtown)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+#filters by gender, if gender = M
+@app.route('/male', methods = ['GET'])
+def get_male():
+    gender = 'M'
+    event = CrimeData.query.filter_by(Gender=gender)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+#filters by gender, if gender = F
+@app.route('/female', methods = ['GET'])
+def get_female():
+    gender = 'F'
+    event = CrimeData.query.filter_by(Gender=gender)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+    
+#filters by crime code 4E
+@app.route('/crime4E', methods = ['GET'])
+def get_code():
+    code = '4E'
+    event = CrimeData.query.filter_by(CrimeCode=code)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
 #----------------------------------------------------------------------------------------
 @app.route('/', methods =["GET", "POST"])
 def defaultpage():

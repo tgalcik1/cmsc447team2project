@@ -14,8 +14,12 @@
 <div>
     <canvas id="chart2" width="50" height="300"></canvas>
 </div>
+<div>
+    <canvas id="chart3" width="50" height="300"></canvas>
+</div>
     <script>
-        const years=[2018,2019,2020,2021,2022];   
+        const years=[2018,2019,2020,2021,2022]; 
+        const covidYears=[2020,2021,2022];   
         const crimes=['COMMON ASSAULT', 'LARCENY', 'AGG. ASSAULT', 'ROBBERY', 'AUTO THEFT', 'ROBBERY - CARJACKING', 
         'BURGLARY', 'LARCENY FROM AUTO', 'RAPE', 'SHOOTING', 'HOMICIDE', 'ROBBERY - COMMERCIAL', 'ARSON'] ;
         let first_year=0; //crime from 2018
@@ -37,7 +41,11 @@
         let crime11=0;
         let crime12=0;
         let crime13=0;
-        Promise.all([chartIt(),chartIt2()]);
+
+        let covidDate1=0;
+        let covidDate2=0;
+        let covidDate3=0;
+        Promise.all([chartIt(),chartIt2(), chartIt3()]);
         //chartIt2();
 
 
@@ -51,7 +59,7 @@
                 data: {
                     labels: years,
                     datasets: [{
-                        label: 'Place Holder ',
+                        label: 'Total Crimes Per Year',
                         data: ytemps,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -89,7 +97,7 @@
                 data: {
                     labels: crimes,
                     datasets: [{
-                        label: 'Place Holder ',
+                        label: 'Crimes From 2018-2022',
                         data: xval,
                         backgroundColor: [
                             'rgba(25, 199, 132, 0.2)',
@@ -115,18 +123,57 @@
             });
 
         }
+
+        //types of crimes will go here
+        async function chartIt3(){
+            await getData();
+            const xval = [covidDate1,covidDate2,covidDate3];   
+            const ctx = document.getElementById('chart3').getContext('2d');
+            const myChart = new Chart(ctx, {
+        
+                type: 'bar',
+                data: {
+                    labels:covidYears,
+                    datasets: [{
+                        label: 'COVID cases per year',
+                        data: xval,
+                        backgroundColor: [
+                            'rgba(252, 190, 102, 0.2)',
+                            
+                        ],
+                        borderColor: [
+                            'rgba(252, 190, 102, 1)',
+                            
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+
+        }
       //asynchronou function making asynchronous calls using the await key
 
       getData();
       async function getData(){
             const response = await fetch('Part_1_Crime_Data_.csv');
+            const response2 = await fetch('MDCOVID19_CasesByCounty.csv');
             //turning the data into text format
             const data = await response.text();
-
+            const covid = await response2.text();
             //splitting the text data up based on new space
             //deletes the 0th element and gives me copy of array from index 1 onward
             const table = data.split('\n').slice(1)
-
+            const covidTable= covid.split('\n').slice(1)
             //forEach is a higher order function that allows you to apply something to ecvery element of the array
             //each element of the array is represented by row
             let a=0;//for 2018
@@ -212,11 +259,52 @@
                     else if  (columns[6].includes('ARSON')) {
                     crime13=++arson;
                     }
+
+
+
+                   
                     
             });
+            //let covidCount1=0;
+            //let covidCount2=0;
+            //let covidCount3=0;
             
-            console.log(robCar);
+            covidTable.forEach(row => {
+                //splitting each row up by commas
+                const columns=row.split(',');
+                
+                if (columns[1].includes("2020/12/31")) {
+                    var initial =parseInt(columns[4]);
+                    var initial2= parseInt(columns[5]);
+                    covidDate1=initial+initial2;
+                    
+                    }
+                else if (columns[1].includes('2021/12/31')) {
+                    var initial =parseInt(columns[4]);
+                    var initial2= parseInt(columns[5]);
+                    var initial3 = initial+initial2;
+                    covidDate2=initial3-covidDate1;
+                }
+                else if (columns[1].includes('2022/11/11')) {
+                    var initial =parseInt(columns[4]);
+                    var initial2= parseInt(columns[5]);
+                    var initial3 = initial+initial2;
+                    covidDate3=initial3-covidDate2;
+                    }
+
+                //if (columns[6].includes('COMMON ASSAULT')) {
+                  //  crime1=++comAssault;
+                    //}
+                    
+
+
+              
+            });
+            
+            
         }
+
+        
      
     </script>
   </body>
