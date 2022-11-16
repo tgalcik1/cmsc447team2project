@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Map, TileLayer } from 'react-leaflet';
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
 import 'leaflet/dist/leaflet.css';
 import {crime_points_2018} from '../CrimeDataImports/crime_points_2018.js';
-import crime_points_2019 from '../CrimeDataImports/crime_points_2019';
-import crime_points_2020 from '../CrimeDataImports/crime_points_2020';
-import crime_points_2021 from '../CrimeDataImports/crime_points_2021';
-import crime_points_2022 from '../CrimeDataImports/crime_points_2022';
+import {crime_points_2019} from '../CrimeDataImports/crime_points_2019.js';
+import {crime_points_2020} from '../CrimeDataImports/crime_points_2020.js';
+import {crime_points_2021} from '../CrimeDataImports/crime_points_2021.js';
+import {crime_points_2022} from '../CrimeDataImports/crime_points_2022.js';
 /*
 function DisplayMap() {
   useEffect(() => {
@@ -208,10 +208,96 @@ function DisplayMap() {
 }
 */
 
+function Slider() {
+  const [value, onChange] = useState("2018");
+  var body = document.getElementById("body");
+  
+  useEffect(()=>{
+    var slider = document.getElementById("range").oninput = function(){
+      var value = (this.value-this.min)/(this.max-this.min)*100
+      this.style.background = 'linear-gradient(to right, #ff2a5f 0%, #6b8dff, ' + value + '%, #fff ' + value + '%, #fff 100%)'
+      value = this.value;
+    }
+  })
 
+  return(
+    <div>
+    <div id="map">
+            <Map center={{lat: 39.2904, lng: -76.6122}} zoom={13} style={{
+        height: 600 + "px",
+        width: 1000 + "px",
+      }}>
+        
+                <TileLayer
+                  maxZoom='20'
+                  url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                  attribution="&copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors &copy; <a href=&quot;https://carto.com/attributions&quot;>CARTO</a>"
+                  subdomains= 'abcd'
+                />
+                {value === "2018" &&
+                  <HeatmapLayer
+                  points={crime_points_2018}
+                  longitudeExtractor={(m) => m[1]}
+                  latitudeExtractor={(m) => m[0]}
+                  intensityExtractor={(m) => .5}
+                  radius={15}
+                  blur={9}
+                />
+                }
+                {value === "2019" &&
+                  <HeatmapLayer
+                  points={crime_points_2019}
+                  longitudeExtractor={(m) => m[1]}
+                  latitudeExtractor={(m) => m[0]}
+                  intensityExtractor={(m) => .5}
+                  radius={15}
+                  blur={9}
+                />
+                }
+                {value === "2020" &&
+                  <HeatmapLayer
+                  points={crime_points_2020}
+                  longitudeExtractor={(m) => m[1]}
+                  latitudeExtractor={(m) => m[0]}
+                  intensityExtractor={(m) => .5}
+                  radius={15}
+                  blur={9}
+                />
+                }
+                {value === "2021" &&
+                  <HeatmapLayer
+                  points={crime_points_2021}
+                  longitudeExtractor={(m) => m[1]}
+                  latitudeExtractor={(m) => m[0]}
+                  intensityExtractor={(m) => .5}
+                  radius={15}
+                  blur={9}
+                />
+                }
+                {value === "2022" &&
+                  <HeatmapLayer
+                  points={crime_points_2022}
+                  longitudeExtractor={(m) => m[1]}
+                  latitudeExtractor={(m) => m[0]}
+                  intensityExtractor={(m) => .5}
+                  radius={15}
+                  blur={9}
+                />
+                }
+            </Map>
+            </div>
+    <div className="dateslider">
+      <div className="defaultValue-container">
+        <span className="text">Year:</span>
+        <span id="date">{value}</span>
+      </div>
+      <input type="range" min="2018" max="2022" className="slider" value={value} onChange={({ target: { value: radius } }) => {onChange(radius);}} step="1" id="range"></input>
+    </div>
+    </div>
+  );
+}
 
 class MapView extends Component {
-  
   
   constructor(props) {
     super(props);
@@ -224,7 +310,6 @@ class MapView extends Component {
 
   
   render() {
-
     return (
       <div>
         <div id="header">
@@ -236,36 +321,10 @@ class MapView extends Component {
         </div>
 
         <div id="map_wrapper">
-        <div id="map">
-            <Map center={{lat: 39.2904, lng: -76.6122}} zoom={13} style={{
-        height: 600 + "px",
-        width: 1000 + "px",
-      }}>
-                <TileLayer
-                  maxZoom='20'
-                  url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-                  attribution="&copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors &copy; <a href=&quot;https://carto.com/attributions&quot;>CARTO</a>"
-                  subdomains= 'abcd'
-                />
-                <HeatmapLayer
-          points={crime_points_2018}
-          longitudeExtractor={(m) => m[1]}
-          latitudeExtractor={(m) => m[0]}
-          intensityExtractor={(m) => .5}
-          radius={15}
-          blur={9}
-        />
-              </Map>
-            </div>
+            <Slider></Slider>
+            <div></div>
           <div id="filters">
             <span className="text">Data Filters</span>
-          </div>
-          <div className="dateslider">
-            <div className="defaultValue-container">
-              <span className="text">Year:</span>
-              <span id="date">2018</span>
-            </div>
-            <input type="range" min="2018" max="2022" defaultValue="2018" className="slider" id="range"></input>
           </div>
           <div className="crime_type_dropdown">
             <span className="text">Crime Type:</span>
