@@ -192,7 +192,7 @@ def get_crimedata2018():
 
 #filters only data for 2019
 @app.route('/crime2019', methods = ['GET'])
-def get_crimedata2018():
+def get_crimedata2019():
     first_date = '2019/01/01 13:40:00+00'
     last_date = '2019/12/31 13:40:00+00'
     transactions = CrimeData.query.filter(CrimeData.CrimeDateTime.between(first_date, last_date)).all()
@@ -201,7 +201,7 @@ def get_crimedata2018():
 
 #filters only data for 2020
 @app.route('/crime2020', methods = ['GET'])
-def get_crimedata2018():
+def get_crimedata2020():
     first_date = '2020/01/01 13:40:00+00'
     last_date = '2020/12/31 13:40:00+00'
     transactions = CrimeData.query.filter(CrimeData.CrimeDateTime.between(first_date, last_date)).all()
@@ -210,7 +210,7 @@ def get_crimedata2018():
 
 #filters only data for 2021
 @app.route('/crime2021', methods = ['GET'])
-def get_crimedata2018():
+def get_crimedata2021():
     first_date = '2021/01/01 13:40:00+00'
     last_date = '2021/12/31 13:40:00+00'
     transactions = CrimeData.query.filter(CrimeData.CrimeDateTime.between(first_date, last_date)).all()
@@ -219,7 +219,7 @@ def get_crimedata2018():
 
 #filters only data for 2020
 @app.route('/crime2022', methods = ['GET'])
-def get_crimedata2018():
+def get_crimedata2022():
     first_date = '2022/01/01 13:40:00+00'
     last_date = '2022/12/31 13:40:00+00'
     transactions = CrimeData.query.filter(CrimeData.CrimeDateTime.between(first_date, last_date)).all()
