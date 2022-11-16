@@ -257,6 +257,112 @@ def get_code():
     event = CrimeData.query.filter_by(CrimeCode=code)
     results = crimedatas_schema.dump(event)
     return jsonify(results)
+
+#Filters for crime by description(crime type):
+
+#Common Assault
+@app.route('/comAssault', methods = ['GET'])
+def get_comm_assault():
+    desc = "COMMON ASSAULT"
+    event = CrimeData.query.filter_by(Description = desc)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+#Larceny
+@app.route('/larceny', methods = ['GET'])
+def get_larceny():
+    desc = "LARCENY"
+    event = CrimeData.query.filter_by(Description = desc)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+#Agg. Assault
+@app.route('/aggAssault', methods = ['GET'])
+def get_agg_assault():
+    desc = "AGG. ASSAULT"
+    event = CrimeData.query.filter_by(Description = desc)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+#Robbery
+@app.route('/robbery', methods = ['GET'])
+def get_robbery():
+    desc = "ROBBERY"
+    event = CrimeData.query.filter_by(Description = desc)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+    
+#auto theft
+@app.route('/autoTheft', methods = ['GET'])
+def get_auto():
+    desc = "AUTO THEFT"
+    event = CrimeData.query.filter_by(Description = desc)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+#carjacking
+@app.route('/carjack', methods = ['GET'])
+def get_carjack():
+    desc = "ROBBERY - CARJACKING"
+    event = CrimeData.query.filter_by(Description = desc)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+#burglary
+@app.route('/burglary', methods = ['GET'])
+def get_burglary():
+    desc = "BURGLARY"
+    event = CrimeData.query.filter_by(Description = desc)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+#larcenyFromAuto
+@app.route('/larcenyAuto', methods = ['GET'])
+def get_larcenyAuto():
+    desc = "LARCENY FROM AUTO"
+    event = CrimeData.query.filter_by(Description = desc)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+#rape
+@app.route('/rape', methods = ['GET'])
+def get_rape():
+    desc = "RAPE"
+    event = CrimeData.query.filter_by(Description = desc)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+#shooting
+@app.route('/shooting', methods = ['GET'])
+def get_shooting():
+    desc = "SHOOTING"
+    event = CrimeData.query.filter_by(Description = desc)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+#arson
+@app.route('/arson', methods = ['GET'])
+def get_arson():
+    desc = "ARSON"
+    event = CrimeData.query.filter_by(Description = desc)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results) 
+
+#robberyCommercial
+@app.route('/commercial', methods = ['GET'])
+def get_commercial_robbery():
+    desc = "ROBBERY - COMMERCIAL"
+    event = CrimeData.query.filter_by(Description = desc)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results) 
+
+#homicide
+@app.route('/homicide', methods = ['GET'])
+def get_homicide():
+    desc = "HOMICIDE"
+    event = CrimeData.query.filter_by(Description = desc)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
 #----------------------------------------------------------------------------------------
 @app.route('/', methods =["GET", "POST"])
 def defaultpage():
