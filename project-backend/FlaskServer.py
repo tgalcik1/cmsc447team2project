@@ -1,31 +1,20 @@
-from re import T
-from tkinter import N
-from turtle import Shape
 from flask import Flask, render_template, request, jsonify, redirect, url_for
-from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 import pandas as pd
 import mysql.connector
 import os
-from os.path import join, dirname, realpath
 #added some will delete not used
-from dataclasses import fields
 from flask import Flask;
 from flask import jsonify, request;
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
-from sqlalchemy import Column, ForeignKey, Integer, Table
-from sqlalchemy.orm import declarative_base, relationship
 import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-#
-from datetime import date, datetime, timedelta
-from faker import Faker 
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy 
-from sqlalchemy import func
+
 
 mydb = mysql.connector.connect(
   host="localhost",
