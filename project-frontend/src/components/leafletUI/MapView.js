@@ -311,14 +311,13 @@ class MapView extends Component {
   
   render() {
     return (
-      <body style={{background: "linear-gradient(359deg, #691225, #32427c, #1a1a1a, #1a1a1a) no-repeat center center fixed",
-        backgroundSize: "200% 200%",
-        backgroundPosition: "0% 40%",
-        transition: "ease-out background-position 300ms",
-        backdropFilter: "blur(1.5rem)"}}>
       <div>
         <div id="header">
           <span className="text">Baltimore COVID-19 and Crime Data Visualizer</span>
+        </div>
+
+        <div id="about">
+          <span className="text">About</span>
         </div>
 
         <div id="map_wrapper">
@@ -329,7 +328,8 @@ class MapView extends Component {
           </div>
           <div className="crime_type_dropdown">
             <span className="text">Crime Type:</span>
-            <select name="crime_type" id="crime_type" multiple>
+            <select name="crime_type" id="crime_type">
+              <option defaultValue="all">All Crimes</option>
               <option defaultValue="agg_assault">Aggravated Assault</option>
               <option defaultValue="arson">Arson</option>
               <option defaultValue="auto_theft">Auto Theft</option>
@@ -345,9 +345,33 @@ class MapView extends Component {
               <option defaultValue="shooting">Shooting</option>
             </select>
           </div>
+          <div className="gender_dropdown">
+          <span className="text">Sex:</span>
+          <select name="gender" id="gender">
+          <option defaultValue="all">All</option>
+            <option defaultValue="male">Male</option>
+            <option defaultValue="female">Female</option>
+            <option defaultValue="unspecified">Unspecified</option>
+          </select>
+          </div>
+          <div className="district_dropdown">
+          <span className="text">District:</span>
+          <select name="district" id="district">
+            <option defaultValue="All">All</option>
+            <option defaultValue="Northwest">Northwest</option>
+            <option defaultValue="Northern">Northern</option>
+            <option defaultValue="Northeast">Northeast</option>
+            <option defaultValue="Western">Western</option>
+            <option defaultValue="Central">Central</option>
+            <option defaultValue="Eastern">Eastern</option>
+            <option defaultValue="Southwest">Southwest</option>
+            <option defaultValue="Southern">Southern</option>
+            <option defaultValue="Southeast">Southeast</option>
+            <option defaultValue="unspecified">Unspecified</option>
+          </select>
+          </div>
         </div>
         </div>
-        </body>
     );
   }
 }

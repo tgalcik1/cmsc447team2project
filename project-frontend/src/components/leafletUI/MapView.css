@@ -3,9 +3,17 @@
   height: 100vh;
 }
 
+body {
+  background: linear-gradient(359deg, #691225, #32427c, #1a1a1a, #1a1a1a) no-repeat center center fixed;
+  background-size: 200% 200%;
+  background-position: 0% 40%;
+  transition: ease-out background-position 300ms;
+  backdrop-filter: blur(1.5rem);
+}
 
 #map_wrapper {
-  top: 64px;
+  left: 20px;
+  top: 150px;
   position: absolute;
   padding: 20px;
   width: 1220px;
@@ -27,7 +35,7 @@
   top: 45px;
   overflow-y: auto;
   color: white;
-  height: 240px;
+  height: 40px;
   width: 150px;
   background-color: rgba(37, 37, 42, 0.75);
   font-size: 14px;
@@ -58,7 +66,7 @@ select[multiple]:focus-within{
   top:165px;
   float: right;
   width: 150px;
-  height: 280px;
+  height: 80px;
   padding: 10px;
   align-content: center;
   border-radius: 15px;
@@ -140,10 +148,8 @@ select[multiple]:focus-within{
   width: 150px;
   padding: 10px;
   border-radius: 15px;
-  background-color: rgba(25, 25, 28, 0.51);
   align-content: center;
   text-align: center;
-  box-shadow: 4px 4px #6b8dff;
 }
 
 #header{
@@ -176,5 +182,89 @@ select[multiple]:focus-within{
 #about:hover{
   transform: scale(1.05);
   background-color: #3c3c41;
+  transition: ease-out transform 200ms;
+}
+
+#gender{
+  position: absolute;
+  left: 10px;
+  top: 45px;
+  overflow-y: auto;
+  color: white;
+  height: 40px;
+  width: 150px;
+  background-color: rgba(37, 37, 42, 0.75);
+  font-size: 14px;
+  font-family: 'Karla', sans-serif;
+  text-shadow: 0px 1px 4px #000000;
+  font-weight: 900;
+}
+
+#gender:hover{
+  transform: scale(1.02);
+  background-color: rgba(49, 49, 52, 0.47);
+  transition: ease-out transform 200ms;
+}
+
+.gender_dropdown{
+  position: absolute;
+  left:1054px;
+  top:275px;
+  float: right;
+  width: 150px;
+  height: 80px;
+  padding: 10px;
+  align-content: center;
+  border-radius: 15px;
+  background-color: rgba(25, 25, 28, 0.51);
+  box-shadow: 4px 4px #6b8dff;
+  text-align: center;
+}
+
+.gender_dropdown:hover{
+  transform: scale(1.02);
+  background-color: rgba(49, 49, 52, 0.47);
+  transition: ease-out transform 200ms;
+}
+
+#district{
+  position: absolute;
+  left: 10px;
+  top: 45px;
+  overflow-y: auto;
+  color: white;
+  height: 40px;
+  width: 150px;
+  background-color: rgba(37, 37, 42, 0.75);
+  font-size: 14px;
+  font-family: 'Karla', sans-serif;
+  text-shadow: 0px 1px 4px #000000;
+  font-weight: 900;
+}
+
+#district:hover{
+  transform: scale(1.02);
+  background-color: rgba(49, 49, 52, 0.47);
+  transition: ease-out transform 200ms;
+}
+
+.district_dropdown{
+  position: absolute;
+  left:1054px;
+  top:385px;
+  float: right;
+  width: 150px;
+  height: 80px;
+  padding: 10px;
+  align-content: center;
+  border-radius: 15px;
+  background-color: rgba(25, 25, 28, 0.51);
+  box-shadow: 4px 4px #6b8dff;
+  text-align: center;
+}
+
+.district_dropdown:hover{
+  transform: scale(1.02);
+  background-color: rgba(49, 49, 52, 0.47);
   transition: ease-out transform 200ms;
 }
