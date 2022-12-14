@@ -491,6 +491,7 @@ def main():
     #parseCSV_covidcases(r"C:\Users\rober\Downloads\MDCOVID19_CasesByCounty.csv")
     #parseCSV_coviddeaths(r"C:\Users\rober\Downloads\MDCOVID19_ConfirmedDeathsByCounty.csv")
     app.run(host='localhost', port=5000)
+    #ADDED 
 
 if __name__=="__main__":
     main()
