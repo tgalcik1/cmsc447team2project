@@ -352,6 +352,7 @@ def get_homicide():
     event = CrimeData.query.filter_by(Description = desc)
     results = crimedatas_schema.dump(event)
     return jsonify(results)
+
 #----------------------------------------------------------------------------------------
 @app.route('/', methods =["GET", "POST"])
 def defaultpage():
@@ -484,12 +485,9 @@ def parseCSV_crime(filePath):
 
 
 def main():
-    #parseCSV_crime(r"C:\Users\rober\Downloads\Part_1_Crime_Data_.csv")
-    #parseCSV_covidcases(r"C:\Users\lukec\Desktop\MDCOVID19_CasesByCounty.csv")
-    #parseCSV_coviddeaths(r"C:\Users\lukec\Desktop\MDCOVID19_ConfirmedDeathsByCounty.csv")
-    #parseCSV_crime(r"C:\Users\lukec\Desktop\Part_1_Crime_Data_.csv")
-    #parseCSV_covidcases(r"C:\Users\rober\Downloads\MDCOVID19_CasesByCounty.csv")
-    #parseCSV_coviddeaths(r"C:\Users\rober\Downloads\MDCOVID19_ConfirmedDeathsByCounty.csv")
+    #parseCSV_crime(r"C:\Users\opeye\Downloads\Part_1_Crime_Data_.csv")
+    #parseCSV_covidcases(r"C:\Users\opeye\Downloads\MDCOVID19_CasesByCounty.csv")
+    #parseCSV_coviddeaths(r"C:\Users\opeye\Downloads\MDCOVID19_ConfirmedDeathsByCounty.csv")
     app.run(host='localhost', port=5000)
 
 if __name__=="__main__":
