@@ -7,6 +7,7 @@ import {crime_points_2019} from '../CrimeDataImports/crime_points_2019.js';
 import {crime_points_2020} from '../CrimeDataImports/crime_points_2020.js';
 import {crime_points_2021} from '../CrimeDataImports/crime_points_2021.js';
 import {crime_points_2022} from '../CrimeDataImports/crime_points_2022.js';
+import './MapView.css';
 /*
 function DisplayMap() {
   useEffect(() => {
@@ -307,17 +308,17 @@ class MapView extends Component {
       height: 1000
     }
   }
-
   
   render() {
     return (
+      <body style={{background: "linear-gradient(359deg, #691225, #32427c, #1a1a1a, #1a1a1a) no-repeat center center fixed",
+        backgroundSize: "200% 200%",
+        backgroundPosition: "0% 40%",
+        transition: "ease-out background-position 300ms",
+        backdropFilter: "blur(1.5rem)"}}>
       <div>
         <div id="header">
           <span className="text">Baltimore COVID-19 and Crime Data Visualizer</span>
-        </div>
-
-        <div id="about">
-          <span className="text">About</span>
         </div>
 
         <div id="map_wrapper">
@@ -346,6 +347,7 @@ class MapView extends Component {
           </div>
         </div>
         </div>
+        </body>
     );
   }
 }
