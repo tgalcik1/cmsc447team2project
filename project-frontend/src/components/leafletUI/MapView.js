@@ -7,6 +7,7 @@ import {crime_points_2019} from '../CrimeDataImports/crime_points_2019.js';
 import {crime_points_2020} from '../CrimeDataImports/crime_points_2020.js';
 import {crime_points_2021} from '../CrimeDataImports/crime_points_2021.js';
 import {crime_points_2022} from '../CrimeDataImports/crime_points_2022.js';
+import './MapView.css';
 /*
 function DisplayMap() {
   useEffect(() => {
@@ -307,7 +308,6 @@ class MapView extends Component {
       height: 1000
     }
   }
-
   
   render() {
     return (
@@ -328,7 +328,8 @@ class MapView extends Component {
           </div>
           <div className="crime_type_dropdown">
             <span className="text">Crime Type:</span>
-            <select name="crime_type" id="crime_type" multiple>
+            <select name="crime_type" id="crime_type">
+              <option defaultValue="all">All Crimes</option>
               <option defaultValue="agg_assault">Aggravated Assault</option>
               <option defaultValue="arson">Arson</option>
               <option defaultValue="auto_theft">Auto Theft</option>
@@ -343,6 +344,31 @@ class MapView extends Component {
               <option defaultValue="robbery_commercial">Robbery - Commercial</option>
               <option defaultValue="shooting">Shooting</option>
             </select>
+          </div>
+          <div className="gender_dropdown">
+          <span className="text">Sex:</span>
+          <select name="gender" id="gender">
+          <option defaultValue="all">All</option>
+            <option defaultValue="male">Male</option>
+            <option defaultValue="female">Female</option>
+            <option defaultValue="unspecified">Unspecified</option>
+          </select>
+          </div>
+          <div className="district_dropdown">
+          <span className="text">District:</span>
+          <select name="district" id="district">
+            <option defaultValue="All">All</option>
+            <option defaultValue="Northwest">Northwest</option>
+            <option defaultValue="Northern">Northern</option>
+            <option defaultValue="Northeast">Northeast</option>
+            <option defaultValue="Western">Western</option>
+            <option defaultValue="Central">Central</option>
+            <option defaultValue="Eastern">Eastern</option>
+            <option defaultValue="Southwest">Southwest</option>
+            <option defaultValue="Southern">Southern</option>
+            <option defaultValue="Southeast">Southeast</option>
+            <option defaultValue="unspecified">Unspecified</option>
+          </select>
           </div>
         </div>
         </div>
