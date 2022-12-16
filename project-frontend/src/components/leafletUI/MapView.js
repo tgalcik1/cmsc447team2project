@@ -219,7 +219,7 @@ function Slider() {
       this.style.background = 'linear-gradient(to right, #ff2a5f 0%, #6b8dff, ' + value + '%, #fff ' + value + '%, #fff 100%)'
       value = this.value;
     }
-  })
+  }) 
 
   function onClick(e) {
     var jsonData = { "CrimeDateTime": "2018", "Description" : "Arson", "Gender": "F", "District": "Northern"} 
