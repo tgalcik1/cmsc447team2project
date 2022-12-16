@@ -15,6 +15,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy 
+import collections
 
 
 mydb = mysql.connector.connect(
@@ -97,7 +98,6 @@ def get_coviddeaths():
 
 
 
-
 #---------------------------------------------------------------------------------------
 class CrimeData(db.Model):
     __tablename__ = 'crimedata'
@@ -163,6 +163,10 @@ class CrimeDataSchema(ma.Schema):
 
 crimedata_schema = CrimeDataSchema()
 crimedatas_schema = CrimeDataSchema(many=True)
+
+
+
+
 
 @app.route('/crimedata', methods = ['GET'])
 def get_crimedata():
@@ -230,18 +234,73 @@ def post_filterBySelection():
             final_command = final_command + "`District` = '" + row['District'] + "' "
         final_command  = final_command + ";"
         
-        
+        object_list = []
         print(final_command)
         mycursor.execute(final_command)
         myresult = mycursor.fetchall()
-        print(myresult)
-        results = crimedatas_schema.dump(myresult)
-        return jsonify(results)
-        
+        for rows in myresult:
+            d = collections.OrderedDict()
+            d["X"] = rows[0]
+            d["Y"] = rows[1]
+            d["RowID"] = rows[2]
+            d["CrimeDateTime"] = rows[3]
+            d["CrimeCode"] = rows[4]
+            d["Location"] = rows[5]
+            d["Description"] = rows[6]
+            d["Inside_Outside"] =rows[7]
+            d["Weapon"] = rows[8]
+            d["Post"] = rows[9]
+            d["Gender"] = rows[10]
+            d["Age"] = rows[11]
+            d["Race"] = rows[12]
+            d["Ethnicity"] = rows[13]
+            d["District"] = rows[14]
+            d["Neighborhood"] = rows[15]
+            d["Latitude"] = rows[16]
+            d["Longitude"] = rows[17]
+            d["GeoLocation"] = rows[18]
+            d["Premise"] = rows[19]
+            d["VRIName"] = rows[20]
+            d["Total_Incidents"] = rows[21]
+            d["Shape"] = rows[22]
+            object_list.append(d)
+            
+        results = json.dumps(object_list)
+        return results
+    
+    object_list = []    
     mycursor.execute(final_command)
     myresult = mycursor.fetchall()
-    results = crimedatas_schema.dump(myresult)
-    return jsonify(results)    
+    for rows in myresult:
+            d = collections.OrderedDict()
+            d["X"] = rows[0]
+            d["Y"] = rows[1]
+            d["RowID"] = rows[2]
+            d["CrimeDateTime"] = rows[3]
+            d["CrimeCode"] = rows[4]
+            d["Location"] = rows[5]
+            d["Description"] = rows[6]
+            d["Inside_Outside"] =rows[7]
+            d["Weapon"] = rows[8]
+            d["Post"] = rows[9]
+            d["Gender"] = rows[10]
+            d["Age"] = rows[11]
+            d["Race"] = rows[12]
+            d["Ethnicity"] = rows[13]
+            d["District"] = rows[14]
+            d["Neighborhood"] = rows[15]
+            d["Latitude"] = rows[16]
+            d["Longitude"] = rows[17]
+            d["GeoLocation"] = rows[18]
+            d["Premise"] = rows[19]
+            d["VRIName"] = rows[20]
+            d["Total_Incidents"] = rows[21]
+            d["Shape"] = rows[22]
+            object_list.append(d)
+    
+    results = json.dumps(object_list)
+
+    return results  
     
         
 
@@ -458,11 +517,11 @@ def get_larcenyAuto():
 #rape
 @app.route('/rape', methods = ['GET'])
 def get_rape():
-    gender = "F"
     desc = "RAPE"
-    event1 = CrimeData.query.filter_by(Description = desc)
-    event = event1.query.filter(Gender = gender)
+    event = CrimeData.query.filter_by(Description = desc)
+    print(event)
     results = crimedatas_schema.dump(event)
+    print(results)
     return jsonify(results)
 
 #shooting
