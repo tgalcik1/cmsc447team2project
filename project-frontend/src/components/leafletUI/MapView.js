@@ -209,6 +209,14 @@ function DisplayMap() {
 }
 */
 
+// Global vars for filtering
+// Initialized to some default values
+// NULL values return all tuples for a given column
+var year = 2018;
+var crime_type = 'NULL';
+var gender = 'NULL';
+var district = 'NULL';
+
 function Slider() {
   const [value, onChange] = useState("2018");
   var body = document.getElementById("body");
@@ -218,13 +226,14 @@ function Slider() {
       var value = (this.value-this.min)/(this.max-this.min)*100
       this.style.background = 'linear-gradient(to right, #ff2a5f 0%, #6b8dff, ' + value + '%, #fff ' + value + '%, #fff 100%)'
       value = this.value;
+      year = this.value;
     }
-  }) 
+  })
 
   function onClick(e) {
-    var jsonData = { "CrimeDateTime": "2018", "Description" : "Arson", "Gender": "F", "District": "Northern"} 
+    var jsonData = { "CrimeDateTime": year, "Description" : crime_type, "Gender": gender, "District": district}
     e.preventDefault();
-    console.log('You clicked submit.');
+    console.log(jsonData);
 
     // Send data to the backend via POST
     fetch('http://localhost:5000/', {  // Enter your IP address here
@@ -317,6 +326,73 @@ function Slider() {
   );
 }
 
+function CrimeTypeDropdown() {
+  const [value, onChange] = useState();
+  crime_type = value;
+
+  return(<div className="crime_type_dropdown">
+            <span className="text">Crime Type:</span>
+            <select name="crime_type" id="crime_type" defaultValue="Arson" onChange={({ target: { value: radius } }) => {onChange(radius);}}>
+              <option defaultValue="all">All Crimes</option>
+              <option defaultValue="agg_assault">Aggravated Assault</option>
+              <option defaultValue="arson">Arson</option>
+              <option defaultValue="auto_theft">Auto Theft</option>
+              <option defaultValue="burglary">Burglary</option>
+              <option defaultValue="common_assault">Common Assault</option>
+              <option defaultValue="homicide">Homicide</option>
+              <option defaultValue="larceny">Larceny</option>
+              <option defaultValue="larceny_from_auto">Larceny From Auto</option>
+              <option defaultValue="rape">Rape</option>
+              <option defaultValue="robbery">Robbery</option>
+              <option defaultValue="robbery_carjacking">Robbery - Carjacking</option>
+              <option defaultValue="robbery_commercial">Robbery - Commercial</option>
+              <option defaultValue="shooting">Shooting</option>
+            </select>
+          </div>
+  )
+}
+
+function GenderDropdown(){
+  const [value, onChange] = useState();
+  gender = value;
+
+  return(
+    <div className="gender_dropdown">
+    <span className="text">Sex:</span>
+    <select name="gender" id="gender" defaultValue="Arson" onChange={({ target: { value: radius } }) => {onChange(radius);}}>
+    <option defaultValue="all">All</option>
+      <option defaultValue="male">Male</option>
+      <option defaultValue="female">Female</option>
+      <option defaultValue="unspecified">Unspecified</option>
+    </select>
+    </div>
+  )
+}
+
+function DistrictDropdown(){
+  const [value, onChange] = useState();
+  district = value;
+
+  return(
+    <div className="district_dropdown">
+    <span className="text">District:</span>
+    <select name="district" id="district" defaultValue="Arson" onChange={({ target: { value: radius } }) => {onChange(radius);}}>
+      <option defaultValue="All">All</option>
+      <option defaultValue="Northwest">Northwest</option>
+      <option defaultValue="Northern">Northern</option>
+      <option defaultValue="Northeast">Northeast</option>
+      <option defaultValue="Western">Western</option>
+      <option defaultValue="Central">Central</option>
+      <option defaultValue="Eastern">Eastern</option>
+      <option defaultValue="Southwest">Southwest</option>
+      <option defaultValue="Southern">Southern</option>
+      <option defaultValue="Southeast">Southeast</option>
+      <option defaultValue="unspecified">Unspecified</option>
+    </select>
+    </div>
+  )
+}
+
 class MapView extends Component {
   
   constructor(props) {
@@ -345,50 +421,9 @@ class MapView extends Component {
           <div id="filters">
             <span className="text">Data Filters</span>
           </div>
-          <div className="crime_type_dropdown">
-            <span className="text">Crime Type:</span>
-            <select name="crime_type" id="crime_type">
-              <option defaultValue="all">All Crimes</option>
-              <option defaultValue="agg_assault">Aggravated Assault</option>
-              <option defaultValue="arson">Arson</option>
-              <option defaultValue="auto_theft">Auto Theft</option>
-              <option defaultValue="burglary">Burglary</option>
-              <option defaultValue="common_assault">Common Assault</option>
-              <option defaultValue="homicide">Homicide</option>
-              <option defaultValue="larceny">Larceny</option>
-              <option defaultValue="larceny_from_auto">Larceny From Auto</option>
-              <option defaultValue="rape">Rape</option>
-              <option defaultValue="robbery">Robbery</option>
-              <option defaultValue="robbery_carjacking">Robbery - Carjacking</option>
-              <option defaultValue="robbery_commercial">Robbery - Commercial</option>
-              <option defaultValue="shooting">Shooting</option>
-            </select>
-          </div>
-          <div className="gender_dropdown">
-          <span className="text">Sex:</span>
-          <select name="gender" id="gender">
-          <option defaultValue="all">All</option>
-            <option defaultValue="male">Male</option>
-            <option defaultValue="female">Female</option>
-            <option defaultValue="unspecified">Unspecified</option>
-          </select>
-          </div>
-          <div className="district_dropdown">
-          <span className="text">District:</span>
-          <select name="district" id="district">
-            <option defaultValue="All">All</option>
-            <option defaultValue="Northwest">Northwest</option>
-            <option defaultValue="Northern">Northern</option>
-            <option defaultValue="Northeast">Northeast</option>
-            <option defaultValue="Western">Western</option>
-            <option defaultValue="Central">Central</option>
-            <option defaultValue="Eastern">Eastern</option>
-            <option defaultValue="Southwest">Southwest</option>
-            <option defaultValue="Southern">Southern</option>
-            <option defaultValue="Southeast">Southeast</option>
-            <option defaultValue="unspecified">Unspecified</option>
-          </select>
-          </div>
+          <CrimeTypeDropdown></CrimeTypeDropdown>
+          <GenderDropdown></GenderDropdown>
+          <DistrictDropdown></DistrictDropdown>
         </div>
         </div>
     );
