@@ -3,6 +3,7 @@ from flask_mysqldb import MySQL
 import pandas as pd
 import mysql.connector
 import os
+import json
 #added some will delete not used
 from flask import Flask;
 from flask import jsonify, request;
@@ -168,6 +169,82 @@ def get_crimedata():
     all_crimedatas = CrimeData.query.all()
     results = crimedatas_schema.dump(all_crimedatas)
     return jsonify(results)
+
+#---------------------------------------------------------------------------------------
+@app.route('/getfilter/endpoint', methods = ['POST'])
+def post_filterBySelection():
+    final_command = ""
+    string_command = "select * from `crimedata` where "
+    final_command += string_command
+    str2018 = "`CrimeDateTime` between '2018/01/29 13:40:00+00' and '2018/12/29 14:50:00+00' "
+    str2019 = "`CrimeDateTime` between '2019/01/29 13:40:00+00' and '2019/12/29 14:50:00+00' "
+    str2020 = "`CrimeDateTime` between '2020/01/29 13:40:00+00' and '2020/12/29 14:50:00+00' "
+    str2021 = "`CrimeDateTime` between '2021/01/29 13:40:00+00' and '2021/12/29 14:50:00+00' "
+    str2022 = "`CrimeDateTime` between '2022/01/29 13:40:00+00' and '2022/12/29 14:50:00+00' "
+    input_json = request.get_json(force = True)
+    
+    data1 = json.dumps(input_json)
+    
+    row = json.loads(data1)
+    
+    print(row)
+    
+    if row['Gender'] == None and row['CrimeDateTime'] == None and row['District'] == None and row['Description'] == None:
+        final_command = "select * from `crimedata`;"
+    else:    
+        if row['CrimeDateTime'] != None:
+            if row['CrimeDateTime'] == "2018":
+                final_command = final_command + str2018
+            elif row['CrimeDateTime'] == "2019":
+                final_command = final_command + str2019
+            elif row['CrimeDateTime'] == "2020":
+                final_command = final_command + str2020
+            elif row['CrimeDateTime'] == "2021":
+                final_command = final_command + str2021
+            else:
+                final_command = final_command + str2022
+                    
+        if row['Description'] != None and row['CrimeDateTime'] != None:
+            final_command = final_command + "and `Description` = '" + row['Description'] + "' "
+        elif row['Description'] != None and row['CrimeDateTime'] == None:
+            final_command = final_command + "`Description` = '" + row['Description'] + "' "
+                
+        if row['Gender'] != None and row['CrimeDateTime'] != None and row['Description'] == None:
+            final_command = final_command + "and `Gender` = '" + row['Gender'] + "' "
+        elif row['Gender'] != None and row['CrimeDateTime'] != None and row['Description'] != None:
+            final_command = final_command + "and `Gender` = '" + row['Gender'] + "' "
+        elif row['Gender'] != None:
+            final_command = final_command + "`Gender` = '" + row['Gender'] + "' "
+                
+        if row['District'] != None and row['CrimeDateTime'] != None and row['Gender'] == None and row['Description'] == None:
+            final_command = final_command + "and `District` = '" + row['District'] + "' "
+        elif row['District'] != None and row['CrimeDateTime'] != None and row['Gender'] != None and row['Description'] == None:
+            final_command = final_command + "and `District` = '" + row['District'] + "' "
+        elif row['District'] != None and row['CrimeDateTime'] != None and row['Gender'] == None and row['Description'] != None:
+            final_command = final_command + "and `District` = '" + row['District'] + "' "
+        elif row['District'] != None and row['CrimeDateTime'] != None and row['Gender'] != None and row['Description'] != None:
+            final_command = final_command + "and `District` = '" + row['District'] + "' "
+        elif row['District'] != None and row['CrimeDateTime'] == None and row['Gender'] != None or row['Description'] != None:
+            final_command = final_command + "and `District` = '" + row['District'] + "' "
+        elif row['District'] != None:
+            final_command = final_command + "`District` = '" + row['District'] + "' "
+        final_command  = final_command + ";"
+        
+        
+        print(final_command)
+        mycursor.execute(final_command)
+        myresult = mycursor.fetchall()
+        print(myresult)
+        results = crimedatas_schema.dump(myresult)
+        return jsonify(results)
+        
+    mycursor.execute(final_command)
+    myresult = mycursor.fetchall()
+    results = crimedatas_schema.dump(myresult)
+    return jsonify(results)    
+    
+        
+
 
 #---------------------------------------------------------------------------------------
 #filters only data for 2018
