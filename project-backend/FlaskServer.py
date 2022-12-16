@@ -215,11 +215,68 @@ def get_crimedata2022():
     results = crimedatas_schema.dump(transactions)
     return jsonify(results)
 
-#filters crime data with neighbourhood as downtown
-@app.route('/downtown', methods = ['GET'])
-def get_downtown():
-    downtown = 'DOWNTOWN'
-    event = CrimeData.query.filter_by(Neighborhood=downtown)
+#filters crime data with districts
+@app.route('/western', methods = ['GET'])
+def get_western():
+    district = 'WESTERN'
+    event = CrimeData.query.filter_by(District=district)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+@app.route('/eastern', methods = ['GET'])
+def get_eastern():
+    district = 'EASTERN'
+    event = CrimeData.query.filter_by(District=district)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+@app.route('/southern', methods = ['GET'])
+def get_southern():
+    district = 'SOUTHERN'
+    event = CrimeData.query.filter_by(District=district)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+@app.route('/southeast', methods = ['GET'])
+def get_southeast():
+    district = 'SOUTHEAST'
+    event = CrimeData.query.filter_by(District=district)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+@app.route('/southwest', methods = ['GET'])
+def get_southwest():
+    district = 'SOUTHWEST'
+    event = CrimeData.query.filter_by(District=district)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+@app.route('/northern', methods = ['GET'])
+def get_northern():
+    district = 'NORTHERN'
+    event = CrimeData.query.filter_by(District=district)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+@app.route('/northwest', methods = ['GET'])
+def get_northwest():
+    district = 'NORTHWEST'
+    event = CrimeData.query.filter_by(District=district)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+
+@app.route('/northeast', methods = ['GET'])
+def get_northeast():
+    district = 'NORTHEAST'
+    event = CrimeData.query.filter_by(District=district)
+    results = crimedatas_schema.dump(event)
+    return jsonify(results)
+
+@app.route('/central', methods = ['GET'])
+def get_central():
+    district = 'CENTRAL'
+    event = CrimeData.query.filter_by(District=district)
     results = crimedatas_schema.dump(event)
     return jsonify(results)
 
@@ -239,13 +296,21 @@ def get_female():
     results = crimedatas_schema.dump(event)
     return jsonify(results)
     
-#filters by crime code 4E
-@app.route('/crime4E', methods = ['GET'])
-def get_code():
-    code = '4E'
-    event = CrimeData.query.filter_by(CrimeCode=code)
+#filters by gender, if gender = Blank
+@app.route('/unspecified', methods = ['GET'])
+def get_unspecified():
+    gender = None
+    event = CrimeData.query.filter_by(Gender=gender)
     results = crimedatas_schema.dump(event)
     return jsonify(results)
+    
+# #filters by crime code 4E
+# @app.route('/crime4E', methods = ['GET'])
+# def get_code():
+#     code = '4E'
+#     event = CrimeData.query.filter_by(CrimeCode=code)
+#     results = crimedatas_schema.dump(event)
+#     return jsonify(results)
 
 #Filters for crime by description(crime type):
 
