@@ -381,8 +381,10 @@ def get_larcenyAuto():
 #rape
 @app.route('/rape', methods = ['GET'])
 def get_rape():
+    gender = "F"
     desc = "RAPE"
-    event = CrimeData.query.filter_by(Description = desc)
+    event1 = CrimeData.query.filter_by(Description = desc)
+    event = event1.query.filter(Gender = gender)
     results = crimedatas_schema.dump(event)
     return jsonify(results)
 
