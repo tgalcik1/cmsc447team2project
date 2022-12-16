@@ -180,11 +180,11 @@ def post_filterBySelection():
     final_command = ""
     string_command = "select * from `crimedata` where "
     final_command += string_command
-    str2018 = "`CrimeDateTime` between '2018/01/29 13:40:00+00' and '2018/12/29 14:50:00+00' "
-    str2019 = "`CrimeDateTime` between '2019/01/29 13:40:00+00' and '2019/12/29 14:50:00+00' "
-    str2020 = "`CrimeDateTime` between '2020/01/29 13:40:00+00' and '2020/12/29 14:50:00+00' "
-    str2021 = "`CrimeDateTime` between '2021/01/29 13:40:00+00' and '2021/12/29 14:50:00+00' "
-    str2022 = "`CrimeDateTime` between '2022/01/29 13:40:00+00' and '2022/12/29 14:50:00+00' "
+    str2018 = "`CrimeDateTime` between '2018/01/01 13:40:00+00' and '2018/12/31 14:50:00+00' "
+    str2019 = "`CrimeDateTime` between '2019/01/01 13:40:00+00' and '2019/12/31 14:50:00+00' "
+    str2020 = "`CrimeDateTime` between '2020/01/01 13:40:00+00' and '2020/12/31 14:50:00+00' "
+    str2021 = "`CrimeDateTime` between '2021/01/01 13:40:00+00' and '2021/12/31 14:50:00+00' "
+    str2022 = "`CrimeDateTime` between '2022/01/01 13:40:00+00' and '2022/12/31 14:50:00+00' "
     input_json = request.get_json(force = True)
     
     data1 = json.dumps(input_json)
