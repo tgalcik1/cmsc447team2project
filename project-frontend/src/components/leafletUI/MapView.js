@@ -221,6 +221,22 @@ function Slider() {
     }
   })
 
+  function onClick(e) {
+    var jsonData = { "CrimeDateTime": "2018", "Description" : "Arson", "Gender": "F", "District": "Northern"} 
+    e.preventDefault();
+    console.log('You clicked submit.');
+
+    // Send data to the backend via POST
+    fetch('http://localhost:5000/', {  // Enter your IP address here
+
+      method: 'POST', 
+      mode: 'cors', 
+      body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
+
+    })
+
+  }
+
   return(
     <div>
     <div id="map">
@@ -294,6 +310,9 @@ function Slider() {
       </div>
       <input type="range" min="2018" max="2022" className="slider" value={value} onChange={({ target: { value: radius } }) => {onChange(radius);}} step="1" id="range"></input>
     </div>
+    <form onSubmit={onClick}>
+      <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }
