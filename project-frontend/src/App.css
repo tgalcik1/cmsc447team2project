@@ -2,3 +2,7 @@
   text-align: center;
   color: blue;
 }
+
+body {
+  background: linear-gradient(359deg, #691225, #32427c, #1a1a1a, #1a1a1a)  no-repeat center center fixed;
+}

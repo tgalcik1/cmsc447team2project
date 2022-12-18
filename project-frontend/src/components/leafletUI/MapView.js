@@ -411,6 +411,10 @@ class MapView extends Component {
   
   render() {
     return (
+      <body style={{backgroundSize: "200% 200%",
+      backgroundPosition: "0% 40%",
+      transition: "ease-out background-position 300ms",
+      backdropFilter: "blur(1.5rem)"}}>
       <div>
         <div id="header">
           <span className="text">Baltimore COVID-19 and Crime Data Visualizer</span>
@@ -431,6 +435,7 @@ class MapView extends Component {
           <DistrictDropdown></DistrictDropdown>
         </div>
         </div>
+        </body>
     );
   }
 }

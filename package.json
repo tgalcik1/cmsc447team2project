@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "leaflet.heat": "^0.2.0",
+    "react-bootstrap": "^2.7.0",
     "react-icons": "^4.6.0"
   }
 }

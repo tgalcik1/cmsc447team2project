@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import About from './pages/about';
 import './App.css';
 import MapView from './components/leafletUI/MapView';
+import CovidData from './components/CovidComp/coviddata';
+import Signin from './pages/signin';
 
 function App() {
   return (
@@ -12,14 +14,12 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-      <Route path="/mapview" element={<MapView/>} exact />
+      <Route path="/crimedata" element={<MapView/>} exact />
+      <Route path="/coviddata" element={<CovidData/>} exact />
       <Route path="/about" element={<About/>} exact />
+      <Route path="/signin" element={<Signin/>} exact />
       </Routes>
     </Router>
-    /*
-    <div className="App">
-      <MapView/>
-    </div>*/
   );
 }
 
