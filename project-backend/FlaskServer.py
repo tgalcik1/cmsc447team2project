@@ -266,7 +266,8 @@ def post_filterBySelection():
             object_list.append(d)
             
         results = json.dumps(object_list)
-        return results
+        result1 = json.loads(results)
+        return result1
     
     object_list = []    
     mycursor.execute(final_command)
@@ -299,8 +300,8 @@ def post_filterBySelection():
             object_list.append(d)
     
     results = json.dumps(object_list)
-
-    return results  
+    result1 = json.loads(results)
+    return result1
     
         
 
