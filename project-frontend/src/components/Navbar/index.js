@@ -15,8 +15,11 @@ const Navbar = () => {
         <Bars />
   
         <NavMenu>
-        <NavLink to='/mapview'>
-            MapView
+        <NavLink to='/crimedata'>
+            CrimeData
+          </NavLink>
+          <NavLink to='/coviddata'>
+            CovidData
           </NavLink>
           <NavLink to='/about'>
             About
