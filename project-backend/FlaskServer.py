@@ -185,6 +185,7 @@ def post_filterBySelection():
     str2020 = "`CrimeDateTime` between '2020/01/01 13:40:00+00' and '2020/12/31 14:50:00+00' "
     str2021 = "`CrimeDateTime` between '2021/01/01 13:40:00+00' and '2021/12/31 14:50:00+00' "
     str2022 = "`CrimeDateTime` between '2022/01/01 13:40:00+00' and '2022/12/31 14:50:00+00' "
+    
     input_json = request.get_json(force = True)
     
     data1 = json.dumps(input_json)
@@ -267,6 +268,7 @@ def post_filterBySelection():
             
         results = json.dumps(object_list)
         result1 = json.loads(results)
+        print(type(result1))
         #returns json now 
         return result1
     
