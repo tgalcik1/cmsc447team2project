@@ -235,6 +235,7 @@ function Slider() {
     e.preventDefault();
     console.log(jsonData);
 
+    let setResp = this;
     // Send data to the backend via POST
     fetch('http://localhost:5000/', {  // Enter your IP address here
 
@@ -242,8 +243,12 @@ function Slider() {
       mode: 'cors', 
       body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
 
+    }).then(function(response) {
+      return response.json();
     })
-
+    .then(function(response) {
+      setResp.setState({ responseData: response });
+    });
   }
 
   return(
@@ -406,6 +411,10 @@ class MapView extends Component {
   
   render() {
     return (
+      <body style={{backgroundSize: "200% 200%",
+      backgroundPosition: "0% 40%",
+      transition: "ease-out background-position 300ms",
+      backdropFilter: "blur(1.5rem)"}}>
       <div>
         <div id="header">
           <span className="text">Baltimore COVID-19 and Crime Data Visualizer</span>
@@ -426,6 +435,7 @@ class MapView extends Component {
           <DistrictDropdown></DistrictDropdown>
         </div>
         </div>
+        </body>
     );
   }
 }

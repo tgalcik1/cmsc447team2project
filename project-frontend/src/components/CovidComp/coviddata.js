@@ -1,8 +1,7 @@
-
 import React from 'react';
-import './about.css';
+import './coviddata.css';
 
-const About = () => {
+const CovidData = () => {
   return (
     <div
       style={{
@@ -11,9 +10,9 @@ const About = () => {
         height: '100vh'
       }}
     >
-      <h1>About page</h1>
+      <h1>CovidData</h1>
     </div>
   );
 };
   
-export default About;
+export default CovidData;
