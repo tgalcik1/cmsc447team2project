@@ -216,7 +216,8 @@ var year = 2018;
 var crime_type = 'NULL';
 var gender = 'NULL';
 var district = 'NULL';
-var geo_data = 'NULL';
+var geo_data = [];
+var crime = [];
 
 function Slider() {
   const [value, onChange] = useState("2018");
@@ -250,7 +251,9 @@ function Slider() {
     //console.log(geo_data);
 
     for (let i = 0; i < geo_data.length; i++){
-      console.log(geo_data[i]);
+      var tmp = [geo_data[i]["Latitude"], geo_data[i]["Longitude"]];
+      crime.push(tmp);
+      console.log(crime);
     }
   }
 
@@ -271,7 +274,7 @@ function Slider() {
                 
                 {value === "2018" &&
                   <HeatmapLayer
-                  points={crime_points_2018}
+                  points={crime}
                   longitudeExtractor={(m) => m[1]}
                   latitudeExtractor={(m) => m[0]}
                   intensityExtractor={(m) => .5}
