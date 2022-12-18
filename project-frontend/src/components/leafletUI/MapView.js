@@ -216,6 +216,7 @@ var year = 2018;
 var crime_type = 'NULL';
 var gender = 'NULL';
 var district = 'NULL';
+var geo_data = 'NULL';
 
 function Slider() {
   const [value, onChange] = useState("2018");
@@ -244,8 +245,13 @@ function Slider() {
       body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
 
     }).then(response => response.json()) 
-    .then(data => console.log(data))
+    .then(data => geo_data = data)
     .catch(error => console.log(error));
+    //console.log(geo_data);
+
+    for (let i = 0; i < geo_data.length; i++){
+      console.log(geo_data[i]);
+    }
   }
 
   return(
