@@ -235,6 +235,7 @@ function Slider() {
     e.preventDefault();
     console.log(jsonData);
 
+    let setResp = this;
     // Send data to the backend via POST
     fetch('http://localhost:5000/', {  // Enter your IP address here
 
@@ -242,8 +243,12 @@ function Slider() {
       mode: 'cors', 
       body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
 
+    }).then(function(response) {
+      return response.json();
     })
-
+    .then(function(response) {
+      setResp.setState({ responseData: response });
+    });
   }
 
   return(
