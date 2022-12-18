@@ -175,7 +175,7 @@ def get_crimedata():
     return jsonify(results)
 
 #---------------------------------------------------------------------------------------
-@app.route('/getfilter/endpoint', methods = ['POST'])
+@app.route('/getfilter/endpoint', methods = ['POST', 'PUT'])
 def post_filterBySelection():
     final_command = ""
     string_command = "select * from `crimedata` where "

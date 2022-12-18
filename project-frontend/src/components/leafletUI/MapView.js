@@ -239,16 +239,14 @@ function Slider() {
     // Send data to the backend via POST
     fetch('http://localhost:5000/getfilter/endpoint', {  // Enter your IP address here
 
-      method: 'POST', 
+      method: 'PUT', 
       mode: 'cors', 
       body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
 
-    }).then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      setResp.setState({ responseData: response });
-    });
+    }).then(response => response.json()) 
+    .catch(error => console.log(error))
+
+    
   }
 
   return(
@@ -265,6 +263,7 @@ function Slider() {
                   attribution="&copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors &copy; <a href=&quot;https://carto.com/attributions&quot;>CARTO</a>"
                   subdomains= 'abcd'
                 />
+                
                 {value === "2018" &&
                   <HeatmapLayer
                   points={crime_points_2018}
