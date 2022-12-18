@@ -233,7 +233,8 @@ function Slider() {
   })
 
   function onClick(e) {
-    var jsonData = {"CrimeDateTime": "2018", "Description" : "ROBBERY", "Gender": "M", "District": "NORTHERN"}
+    crime = [];
+    var jsonData = {"CrimeDateTime": year, "Description" : crime_type, "Gender": gender, "District": district}
     e.preventDefault();
     console.log(jsonData);
 
@@ -253,8 +254,8 @@ function Slider() {
     for (let i = 0; i < geo_data.length; i++){
       var tmp = [geo_data[i]["Latitude"], geo_data[i]["Longitude"]];
       crime.push(tmp);
-      console.log(crime);
     }
+    console.log(crime);
   }
 
   return(
@@ -272,49 +273,9 @@ function Slider() {
                   subdomains= 'abcd'
                 />
                 
-                {value === "2018" &&
+                {
                   <HeatmapLayer
                   points={crime}
-                  longitudeExtractor={(m) => m[1]}
-                  latitudeExtractor={(m) => m[0]}
-                  intensityExtractor={(m) => .5}
-                  radius={15}
-                  blur={9}
-                />
-                }
-                {value === "2019" &&
-                  <HeatmapLayer
-                  points={crime_points_2019}
-                  longitudeExtractor={(m) => m[1]}
-                  latitudeExtractor={(m) => m[0]}
-                  intensityExtractor={(m) => .5}
-                  radius={15}
-                  blur={9}
-                />
-                }
-                {value === "2020" &&
-                  <HeatmapLayer
-                  points={crime_points_2020}
-                  longitudeExtractor={(m) => m[1]}
-                  latitudeExtractor={(m) => m[0]}
-                  intensityExtractor={(m) => .5}
-                  radius={15}
-                  blur={9}
-                />
-                }
-                {value === "2021" &&
-                  <HeatmapLayer
-                  points={crime_points_2021}
-                  longitudeExtractor={(m) => m[1]}
-                  latitudeExtractor={(m) => m[0]}
-                  intensityExtractor={(m) => .5}
-                  radius={15}
-                  blur={9}
-                />
-                }
-                {value === "2022" &&
-                  <HeatmapLayer
-                  points={crime_points_2022}
                   longitudeExtractor={(m) => m[1]}
                   latitudeExtractor={(m) => m[0]}
                   intensityExtractor={(m) => .5}
@@ -345,20 +306,20 @@ function CrimeTypeDropdown() {
   return(<div className="crime_type_dropdown">
             <span className="text">Crime Type:</span>
             <select name="crime_type" id="crime_type" defaultValue="Arson" onChange={({ target: { value: radius } }) => {onChange(radius);}}>
-              <option defaultValue="all">All Crimes</option>
-              <option defaultValue="agg_assault">Aggravated Assault</option>
-              <option defaultValue="arson">Arson</option>
-              <option defaultValue="auto_theft">Auto Theft</option>
-              <option defaultValue="burglary">Burglary</option>
-              <option defaultValue="common_assault">Common Assault</option>
-              <option defaultValue="homicide">Homicide</option>
-              <option defaultValue="larceny">Larceny</option>
-              <option defaultValue="larceny_from_auto">Larceny From Auto</option>
-              <option defaultValue="rape">Rape</option>
-              <option defaultValue="robbery">Robbery</option>
-              <option defaultValue="robbery_carjacking">Robbery - Carjacking</option>
-              <option defaultValue="robbery_commercial">Robbery - Commercial</option>
-              <option defaultValue="shooting">Shooting</option>
+              <option defaultValue="NULL">All Crimes</option>
+              <option defaultValue="AGG_ASSAULT">AGG_ASSAULT</option>
+              <option defaultValue="ARSON">ARSON</option>
+              <option defaultValue="AUTO_THEFT">AUTO_THEFT</option>
+              <option defaultValue="BURGLARY">BURGLARY</option>
+              <option defaultValue="COMMON_ASSAULT">COMMON_ASSAULT</option>
+              <option defaultValue="HOMICIDE">HOMICIDE</option>
+              <option defaultValue="LARCENY">LARCENY</option>
+              <option defaultValue="LARCENY_FROM_AUTO">LARCENY_FROM_AUTO</option>
+              <option defaultValue="RAPE">RAPE</option>
+              <option defaultValue="ROBBERY">ROBBERY</option>
+              <option defaultValue="ROBBERY_CARJACKING">ROBBERY_CARJACKING</option>
+              <option defaultValue="ROBBERY_COMMERCIAL">ROBBERY_COMMERCIAL</option>
+              <option defaultValue="SHOOTING">SHOOTING</option>
             </select>
           </div>
   )
@@ -373,8 +334,8 @@ function GenderDropdown(){
     <span className="text">Sex:</span>
     <select name="gender" id="gender" defaultValue="Arson" onChange={({ target: { value: radius } }) => {onChange(radius);}}>
     <option defaultValue="all">All</option>
-      <option defaultValue="male">Male</option>
-      <option defaultValue="female">Female</option>
+      <option defaultValue="M">M</option>
+      <option defaultValue="F">F</option>
       <option defaultValue="unspecified">Unspecified</option>
     </select>
     </div>
@@ -390,15 +351,15 @@ function DistrictDropdown(){
     <span className="text">District:</span>
     <select name="district" id="district" defaultValue="Arson" onChange={({ target: { value: radius } }) => {onChange(radius);}}>
       <option defaultValue="All">All</option>
-      <option defaultValue="Northwest">Northwest</option>
-      <option defaultValue="Northern">Northern</option>
-      <option defaultValue="Northeast">Northeast</option>
-      <option defaultValue="Western">Western</option>
-      <option defaultValue="Central">Central</option>
-      <option defaultValue="Eastern">Eastern</option>
-      <option defaultValue="Southwest">Southwest</option>
-      <option defaultValue="Southern">Southern</option>
-      <option defaultValue="Southeast">Southeast</option>
+      <option defaultValue="NORTHWEST">NORTHWEST</option>
+      <option defaultValue="NORTHERN">NORTHERN</option>
+      <option defaultValue="NORTHEAST">NORTHEAST</option>
+      <option defaultValue="WESTERN">WESTERN</option>
+      <option defaultValue="CENTRAL">CENTRAL</option>
+      <option defaultValue="EASTERN">EASTERN</option>
+      <option defaultValue="SOUTHWEST">SOUTHWEST</option>
+      <option defaultValue="SOUTHERN">SOUTHERN</option>
+      <option defaultValue="SOUTHEAST">SOUTHEAST</option>
       <option defaultValue="unspecified">Unspecified</option>
     </select>
     </div>
