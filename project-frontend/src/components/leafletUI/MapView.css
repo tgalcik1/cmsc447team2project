@@ -261,3 +261,51 @@ select[multiple]:focus-within{
   background-color: rgba(49, 49, 52, 0.47);
   transition: ease-out transform 200ms;
 }
+
+form{
+  position: absolute;
+  left:1054px;
+  top:495px;
+  float: right;
+  width: 150px;
+  height: 80px;
+  padding: 10px;
+  align-content: center;
+  border-radius: 15px;
+  background-color: rgba(25, 25, 28, 0.51);
+  box-shadow: 4px 4px #6b8dff;
+  text-align: center;
+}
+
+form:hover{
+  transform: scale(1.02);
+  background-color: rgba(49, 49, 52, 0.47);
+  transition: ease-out transform 200ms;
+}
+
+button{
+  position: absolute;
+  left: 10px;
+  top: 30px;
+  overflow-y: auto;
+  color: white;
+  height: 40px;
+  width: 150px;
+  border-color: gray;
+  border-width: 1px;
+  background-color: rgba(37, 37, 42, 0.75);
+  font-size: 14px;
+  font-family: 'Karla', sans-serif;
+  text-shadow: 0px 1px 4px #000000;
+  font-weight: 900;
+}
+
+button:hover{
+  transform: scale(1.02);
+  background-color: rgba(49, 49, 52, 0.47);
+  transition: ease-out transform 200ms;
+}
+
+button:active {
+  background-color: rgba(123, 123, 138, 0.47);
+}
