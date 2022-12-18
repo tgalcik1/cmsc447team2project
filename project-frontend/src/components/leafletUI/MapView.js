@@ -244,10 +244,8 @@ function Slider() {
       body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
 
     }).then(response => response.json()) 
-    .then(res => this.setState(res))
-    .catch(error => console.log(error))
-
-    
+    .then(data => console.log(data))
+    .catch(error => console.log(error));
   }
 
   return(
