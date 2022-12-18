@@ -267,6 +267,7 @@ def post_filterBySelection():
             
         results = json.dumps(object_list)
         result1 = json.loads(results)
+        #returns json now 
         return result1
     
     object_list = []    
