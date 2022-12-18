@@ -231,13 +231,13 @@ function Slider() {
   })
 
   function onClick(e) {
-    var jsonData = { "CrimeDateTime": year, "Description" : crime_type, "Gender": gender, "District": district}
+    var jsonData = {"CrimeDateTime": "2018", "Description" : "ROBBERY", "Gender": "M", "District": "NORTHERN"}
     e.preventDefault();
     console.log(jsonData);
 
     let setResp = this;
     // Send data to the backend via POST
-    fetch('http://localhost:5000/', {  // Enter your IP address here
+    fetch('http://localhost:5000/getfilter/endpoint', {  // Enter your IP address here
 
       method: 'POST', 
       mode: 'cors', 
