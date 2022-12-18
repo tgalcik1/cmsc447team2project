@@ -218,6 +218,8 @@ def post_filterBySelection():
             final_command = final_command + "and `Gender` = '" + row['Gender'] + "' "
         elif row['Gender'] != None and row['CrimeDateTime'] != None and row['Description'] != None:
             final_command = final_command + "and `Gender` = '" + row['Gender'] + "' "
+        elif row['Gender'] != None and row['CrimeDateTime'] == None and row['Description'] != None:
+            final_command = final_command + "and `Gender` = '" + row['Gender'] + "' "
         elif row['Gender'] != None:
             final_command = final_command + "`Gender` = '" + row['Gender'] + "' "
                 
