@@ -292,7 +292,7 @@ function Slider() {
       </div>
       <input type="range" min="2018" max="2022" className="slider" value={value} onChange={({ target: { value: radius } }) => {onChange(radius);}} step="1" id="range"></input>
     </div>
-    <form onSubmit={onClick}>
+    <form class='crimeform' onSubmit={onClick}>
       <button type="submit">Submit</button>
       </form>
     </div>

@@ -70,7 +70,7 @@ const FirstTab = () => {
   return (
     <div className="FirstTab">
         <div className="container">
-            <h3>Baltimore Covid Cases Per Month</h3>
+            <h3 style={{color: "White"}}>Baltimore Covid Cases Per Month</h3>
         </div>
     <div class='parent'>
         <div class='child'>
@@ -100,7 +100,7 @@ const FirstTab = () => {
         </div>    
     </div> 
     <div className="container">
-        <h3>Baltimore Covid Deaths Per Month</h3>
+        <h3 style={{color: "White"}}>Baltimore Covid Deaths Per Month</h3>
     </div>
     <div class='parent'>
         <div class='child'>

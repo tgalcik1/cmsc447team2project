@@ -262,7 +262,7 @@ select[multiple]:focus-within{
   transition: ease-out transform 200ms;
 }
 
-form{
+.crimeform{
   position: absolute;
   left:1054px;
   top:495px;
@@ -277,7 +277,7 @@ form{
   text-align: center;
 }
 
-form:hover{
+.crimeform:hover{
   transform: scale(1.02);
   background-color: rgba(49, 49, 52, 0.47);
   transition: ease-out transform 200ms;

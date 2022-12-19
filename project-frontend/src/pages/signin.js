@@ -19,13 +19,15 @@ const Signin = () => {
   const {username,password} = data;
 
   return (
-<form onSubmit={submitHandler}>
-<input type="text" name="username" value={username}
-onChange={changeHandler}/><br />
-<input type="password" name="password" value={password}
-onChange={changeHandler}/><br />
-<input type="submit" name="submit" />
-</form>
+    <div>
+      <form class = 'signinform' onSubmit={submitHandler}>
+      <input type="text" name="username" value={username}
+      onChange={changeHandler}/><br />
+      <input type="password" name="password" value={password}
+      onChange={changeHandler}/><br />
+      <input type="submit" name="submit" />
+      </form>
+    </div>
   );
 };
   

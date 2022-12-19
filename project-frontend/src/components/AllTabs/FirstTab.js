@@ -48,7 +48,7 @@ const FirstTab = () => {
   return (
     <div className="FirstTab">
         <div className="container">
-  <h3>Baltimore Crime Data Per Month</h3>
+  <h3 style={{color: "White"}}>Baltimore Crime Data Per Month</h3>
   </div>
       <LineChart
           width={1800}
@@ -75,7 +75,7 @@ const FirstTab = () => {
 
         </LineChart>
         <div className="container">
-            <div>Baltimore Crime Data This Year</div>
+            <h3 style={{color: "White"}}>Baltimore Crime Data This Year</h3>
         </div>
         <BarChart
           width={1800}
