@@ -213,10 +213,13 @@ def post_filterBySelection():
             final_command = final_command + "and `Description` = '" + row['Description'] + "' "
         elif row['Description'] != None and row['CrimeDateTime'] == None:
             final_command = final_command + "`Description` = '" + row['Description'] + "' "
+        
                 
         if row['Gender'] != None and row['CrimeDateTime'] != None and row['Description'] == None:
             final_command = final_command + "and `Gender` = '" + row['Gender'] + "' "
         elif row['Gender'] != None and row['CrimeDateTime'] != None and row['Description'] != None:
+            final_command = final_command + "and `Gender` = '" + row['Gender'] + "' "
+        elif row['Gender'] != None and row['CrimeDateTime'] == None and row['Description'] != None:
             final_command = final_command + "and `Gender` = '" + row['Gender'] + "' "
         elif row['Gender'] != None:
             final_command = final_command + "`Gender` = '" + row['Gender'] + "' "
@@ -229,7 +232,11 @@ def post_filterBySelection():
             final_command = final_command + "and `District` = '" + row['District'] + "' "
         elif row['District'] != None and row['CrimeDateTime'] != None and row['Gender'] != None and row['Description'] != None:
             final_command = final_command + "and `District` = '" + row['District'] + "' "
-        elif row['District'] != None and row['CrimeDateTime'] == None and row['Gender'] != None or row['Description'] != None:
+        elif row['District'] != None and row['CrimeDateTime'] == None and row['Gender'] == None and row['Description'] != None:
+            final_command = final_command + "and `District` = '" + row['District'] + "' "
+        elif row['District'] != None and row['CrimeDateTime'] == None and row['Gender'] != None and row['Description'] == None:
+            final_command = final_command + "and `District` = '" + row['District'] + "' "
+        elif row['District'] != None and row['CrimeDateTime'] == None and row['Gender'] != None and row['Description'] != None:
             final_command = final_command + "and `District` = '" + row['District'] + "' "
         elif row['District'] != None:
             final_command = final_command + "`District` = '" + row['District'] + "' "
