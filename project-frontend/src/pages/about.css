@@ -1,7 +1,9 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     color: white;
+    font-family: 'Karla', sans-serif;
+    text-shadow: 0px 1px 4px #000000;
+    font-weight: 900;
   }
   
   html {
@@ -10,6 +12,16 @@ body {
   
   *, *:before, *:after {
     box-sizing: inherit;
+  }
+
+  h1{
+    position: relative;
+    left: 20px;
+  }
+
+  h3{
+    position: relative;
+    left: 50px;
   }
   
   .column {
@@ -22,6 +34,8 @@ body {
   .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin: 8px;
+    background-color: #33333342;
+    border-radius: 10px;
   }
   
   .about-section {
