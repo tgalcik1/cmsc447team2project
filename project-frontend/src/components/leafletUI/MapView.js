@@ -229,34 +229,30 @@ function Slider() {
       this.style.background = 'linear-gradient(to right, #ff2a5f 0%, #6b8dff, ' + value + '%, #fff ' + value + '%, #fff 100%)'
       value = this.value;
       year = this.value;
+
+      crime = [];
+      var jsonData = {"CrimeDateTime": year, "Description" : crime_type, "Gender": gender, "District": district}
+      console.log(jsonData);
+  
+      let setResp = this;
+      // Send data to the backend via POST
+      fetch('http://localhost:5000/getfilter/endpoint', {  // Enter your IP address here
+  
+        method: 'PUT', 
+        mode: 'cors', 
+        body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
+  
+      }).then(response => response.json()) 
+      .then(data => geo_data = data)
+      console.log(geo_data);
+  
+      for (let i = 0; i < geo_data.length; i++){
+        var tmp = [geo_data[i]["Latitude"], geo_data[i]["Longitude"]];
+        crime.push(tmp);
+      }
+      console.log(crime);
     }
   })
-
-  function onClick(e) {
-    crime = [];
-    var jsonData = {"CrimeDateTime": year, "Description" : crime_type, "Gender": gender, "District": district}
-    e.preventDefault();
-    console.log(jsonData);
-
-    let setResp = this;
-    // Send data to the backend via POST
-    fetch('http://localhost:5000/getfilter/endpoint', {  // Enter your IP address here
-
-      method: 'PUT', 
-      mode: 'cors', 
-      body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
-
-    }).then(response => response.json()) 
-    .then(data => geo_data = data)
-    .catch(error => console.log(error));
-    //console.log(geo_data);
-
-    for (let i = 0; i < geo_data.length; i++){
-      var tmp = [geo_data[i]["Latitude"], geo_data[i]["Longitude"]];
-      crime.push(tmp);
-    }
-    console.log(crime);
-  }
 
   return(
     <div>
@@ -292,9 +288,6 @@ function Slider() {
       </div>
       <input type="range" min="2018" max="2022" className="slider" value={value} onChange={({ target: { value: radius } }) => {onChange(radius);}} step="1" id="range"></input>
     </div>
-    <form class='crimeform' onSubmit={onClick}>
-      <button type="submit">Submit</button>
-      </form>
     </div>
   );
 }
@@ -302,6 +295,37 @@ function Slider() {
 function CrimeTypeDropdown() {
   const [value, onChange] = useState();
   crime_type = value;
+
+  useEffect(()=>{
+    var slider = document.getElementById("crime_type").oninput = function(){
+      var value = (this.value-this.min)/(this.max-this.min)*100
+      this.style.background = 'linear-gradient(to right, #ff2a5f 0%, #6b8dff, ' + value + '%, #fff ' + value + '%, #fff 100%)'
+      value = this.value;
+      crime_type = this.value;
+
+      crime = [];
+      var jsonData = {"CrimeDateTime": year, "Description" : crime_type, "Gender": gender, "District": district}
+      console.log(jsonData);
+  
+      let setResp = this;
+      // Send data to the backend via POST
+      fetch('http://localhost:5000/getfilter/endpoint', {  // Enter your IP address here
+  
+        method: 'PUT', 
+        mode: 'cors', 
+        body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
+  
+      }).then(response => response.json()) 
+      .then(data => geo_data = data)
+      console.log(geo_data);
+  
+      for (let i = 0; i < geo_data.length; i++){
+        var tmp = [geo_data[i]["Latitude"], geo_data[i]["Longitude"]];
+        crime.push(tmp);
+      }
+      console.log(crime);
+    }
+  })
 
   return(<div className="crime_type_dropdown">
             <span className="text">Crime Type:</span>
@@ -329,6 +353,37 @@ function GenderDropdown(){
   const [value, onChange] = useState();
   gender = value;
 
+  useEffect(()=>{
+    var slider = document.getElementById("gender").oninput = function(){
+      var value = (this.value-this.min)/(this.max-this.min)*100
+      this.style.background = 'linear-gradient(to right, #ff2a5f 0%, #6b8dff, ' + value + '%, #fff ' + value + '%, #fff 100%)'
+      value = this.value;
+      gender = this.value;
+
+      crime = [];
+      var jsonData = {"CrimeDateTime": year, "Description" : crime_type, "Gender": gender, "District": district}
+      console.log(jsonData);
+  
+      let setResp = this;
+      // Send data to the backend via POST
+      fetch('http://localhost:5000/getfilter/endpoint', {  // Enter your IP address here
+  
+        method: 'PUT', 
+        mode: 'cors', 
+        body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
+  
+      }).then(response => response.json()) 
+      .then(data => geo_data = data)
+      console.log(geo_data);
+  
+      for (let i = 0; i < geo_data.length; i++){
+        var tmp = [geo_data[i]["Latitude"], geo_data[i]["Longitude"]];
+        crime.push(tmp);
+      }
+      console.log(crime);
+    }
+  })
+
   return(
     <div className="gender_dropdown">
     <span className="text">Sex:</span>
@@ -344,6 +399,37 @@ function GenderDropdown(){
 function DistrictDropdown(){
   const [value, onChange] = useState();
   district = value;
+
+  useEffect(()=>{
+    var slider = document.getElementById("district").oninput = function(){
+      var value = (this.value-this.min)/(this.max-this.min)*100
+      this.style.background = 'linear-gradient(to right, #ff2a5f 0%, #6b8dff, ' + value + '%, #fff ' + value + '%, #fff 100%)'
+      value = this.value;
+      district = this.value;
+
+      crime = [];
+      var jsonData = {"CrimeDateTime": year, "Description" : crime_type, "Gender": gender, "District": district}
+      console.log(jsonData);
+  
+      let setResp = this;
+      // Send data to the backend via POST
+      fetch('http://localhost:5000/getfilter/endpoint', {  // Enter your IP address here
+  
+        method: 'PUT', 
+        mode: 'cors', 
+        body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
+  
+      }).then(response => response.json()) 
+      .then(data => geo_data = data)
+      console.log(geo_data);
+  
+      for (let i = 0; i < geo_data.length; i++){
+        var tmp = [geo_data[i]["Latitude"], geo_data[i]["Longitude"]];
+        crime.push(tmp);
+      }
+      console.log(crime);
+    }
+  })
 
   return(
     <div className="district_dropdown">
