@@ -46,7 +46,7 @@ const About = () => {
       <div class="container">
         <h2>Roberto Villanueva</h2>
         <p class="title">Backend Developer</p>
-        <p>W Rizz</p>
+        <p>Talks like he's from "The Boondocks". Biggest inspiration: Uncle Ruckus</p>
         <p>fakeemail@fake.com</p>
       </div>
     </div>
