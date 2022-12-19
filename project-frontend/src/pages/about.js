@@ -24,7 +24,7 @@ const About = () => {
       <div class="container">
         <h2>Tristan Galcik</h2>
         <p class="title">Sprint Leader/Frontend Developer</p>
-        <p>No dick, no balls, and probably no butthole since this guy feeds on radiation</p>
+        <p>its ya boy skinny penis</p>
         <p>fakeemail@fake.com</p>
       </div>
     </div>
@@ -35,7 +35,7 @@ const About = () => {
       <div class="container">
         <h2>Caleb Luke</h2>
         <p class="title">Frontend Developer</p>
-        <p>Ratio + Young boy better.</p>
+        <p>I'm the typa guy to fuck the janitor in exchange for mop water</p>
         <p>fakeemail@fake.com</p>
       </div>
     </div>
@@ -59,7 +59,7 @@ const About = () => {
       <div class="container">
         <h2>Opeyemi Kusemiju</h2>
         <p class="title">Backend Developer</p>
-        <p>Candice balls fit in yo mouf?</p>
+        <p>A successful man is one who earns more than his wife can spend. A successful woman is one who knows where to look for such a man.</p>
         <p>fakeemail@fake.com</p>
       </div>
     </div>
@@ -70,7 +70,7 @@ const About = () => {
       <div class="container">
         <h2>Obinna Ezejiofor</h2>
         <p class="title">Frontend Developer</p>
-        <p>W manz</p>
+        <p>Can cars stop at a bus stop?</p>
         <p>fakeemail@fake.com</p>
       </div>
     </div>
