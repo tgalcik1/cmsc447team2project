@@ -11,9 +11,9 @@ const About = () => {
         height: '100vh'
       }}
     >
+      {/* <p style="color: #ffffff"> </p> */}
       <h1>About page</h1>
-      <h3>Fuckers in school telling me, always in the barber shop
-"Chief Keef ain't 'bout this, Chief Keef ain't 'bout that"
+      <h3>Fuckers in school telling me, always in the barber shop "Chief Keef ain't 'bout this, Chief Keef ain't 'bout that"
 My boy a BD on fucking Lamron and them
 He, he, they say that nigga don't be putting in no work
 Shut the fuck up
