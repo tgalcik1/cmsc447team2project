@@ -3,30 +3,49 @@ import './signin.css';
 import {useState} from 'react';
 
 const Signin = () => {
+  const [status, setStatus] = useState(undefined);
   const [data,setData] = useState({
     username:"",
     password:""
   });
   const submitHandler = e => {
+    var jsonData = {"username": username, "password" : password}
     e.preventDefault();
     console.log(data);
+    let setResp = this;
+    // Send data to the backend via PUT
+    fetch('http://localhost:5000/signin', {  // Enter your IP address here
+
+      method: 'PUT', 
+      mode: 'cors', 
+      body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
+
+    }).then(response => {
+      if(!response.ok) setStatus({ type: 'error' });
+      else setStatus({ type: 'success' });
+      return response.json();
+    }) 
+    .catch(error => console.log(error));
   }
   const changeHandler = e => {
 
     setData({...data,[e.target.name]:[e.target.value]});
     
   }
+
   const {username,password} = data;
 
   return (
     <div>
-      <form class = 'signinform' onSubmit={submitHandler}>
+      <form className = 'signinform' onSubmit={submitHandler}>
       <input type="text" name="username" value={username}
       onChange={changeHandler}/><br />
       <input type="password" name="password" value={password}
       onChange={changeHandler}/><br />
       <input type="submit" name="submit" />
       </form>
+      <>{status?.type === 'success' && <div style={{color: "White", padding: "15px"}}>Admin login successful!</div>}
+      {status?.type === 'error' && <div style={{color: "White", padding: "15px"}}>Login failed</div>}</>
     </div>
   );
 };

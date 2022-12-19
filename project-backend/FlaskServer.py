@@ -218,8 +218,6 @@ def post_filterBySelection():
             final_command = final_command + "and `Gender` = '" + row['Gender'] + "' "
         elif row['Gender'] != None and row['CrimeDateTime'] != None and row['Description'] != None:
             final_command = final_command + "and `Gender` = '" + row['Gender'] + "' "
-        elif row['Gender'] != None and row['CrimeDateTime'] == None and row['Description'] != None:
-            final_command = final_command + "and `Gender` = '" + row['Gender'] + "' "
         elif row['Gender'] != None:
             final_command = final_command + "`Gender` = '" + row['Gender'] + "' "
                 
@@ -357,7 +355,16 @@ def get_crimedata2022():
     results = crimedatas_schema.dump(transactions)
     return jsonify(results)
 
-
+#signin route
+@app.route('/signin', methods = ['PUT'])
+def signin_user():
+    content = request.get_json(force = True)
+    username = content['username'][0]
+    password = content['password'][0]
+    if((username == 'admin') and (password == 'admin')):
+        return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
+    else:
+        return json.dumps({'success':False}), 400, {'ContentType':'application/json'}
 
 #----------------------------------------------------------------------------------------
 @app.route('/', methods =["GET", "POST"])
