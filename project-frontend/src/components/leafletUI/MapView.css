@@ -6,7 +6,7 @@
 
 #map_wrapper {
   left: 20px;
-  top: 150px;
+  top: 20px;
   position: absolute;
   padding: 20px;
   width: 1220px;
@@ -153,6 +153,8 @@ select[multiple]:focus-within{
   background-color: rgba(37, 37, 42, 0.72);
   align-content: center;
   text-align: center;
+  top: 20px;
+  left: 10px;
 }
 
 #header:hover{

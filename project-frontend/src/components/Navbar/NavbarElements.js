@@ -3,7 +3,7 @@ import { NavLink as Link } from 'react-router-dom';
 import styled from 'styled-components';
   
 export const Nav = styled.nav`
-  background: #63D471;
+  background: rgba(255, 255, 255, 0.1);
   height: 85px;
   display: flex;
   justify-content: space-between;
@@ -22,7 +22,12 @@ export const NavLink = styled(Link)`
   height: 100%;
   cursor: pointer;
   &.active {
-    color: #000000;
+    color: #ffffff;
+  }
+  &:hover {
+    transform: scale(1.05);
+    background-color: rgba(49, 49, 52, 0.47);
+    transition: ease-out transform 200ms;
   }
 `;
   
@@ -44,6 +49,8 @@ export const NavMenu = styled.div`
   display: flex;
   align-items: center;
   margin-right: -24px;
+  position: relative;
+  left: 300px;
   /* Second Nav */
   /* margin-right: 24px; */
   /* Third Nav */
@@ -52,6 +59,10 @@ export const NavMenu = styled.div`
   @media screen and (max-width: 768px) {
     display: none;
   }
+  font-size: 26px;
+  font-family: 'Karla', sans-serif;
+  text-shadow: 0px 1px 4px #000000;
+  font-weight: 900;
 `;
   
 export const NavBtn = styled.nav`
@@ -64,12 +75,19 @@ export const NavBtn = styled.nav`
   @media screen and (max-width: 768px) {
     display: none;
   }
+  &:hover {
+    transform: scale(1.02);
+    background-color: rgba(49, 49, 52, 0.47);
+    transition: ease-out transform 200ms;
+  }
 `;
   
 export const NavBtnLink = styled(Link)`
   border-radius: 4px;
   background: #808080;
   padding: 10px 22px;
+  position: relative;
+  left: 450px;
   color: #000000;
   outline: none;
   border: none;
@@ -83,4 +101,6 @@ export const NavBtnLink = styled(Link)`
     background: #fff;
     color: #808080;
   }
+  font-family: 'Karla', sans-serif;
+  font-weight: 900;
 `;
