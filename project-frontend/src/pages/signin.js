@@ -44,7 +44,13 @@ const Signin = () => {
       onChange={changeHandler}/><br />
       <input type="submit" name="submit" />
       </form>
-      <>{status?.type === 'success' && <div style={{color: "White", padding: "15px"}}>Admin login successful!</div>}
+      <>{status?.type === 'success' && <div style={{color: "White", padding: "15px"}}>Admin login successful!
+    <h1>Upload your CSV file</h1>
+    <form method="PUT" action="" enctype="multipart/form-data">
+      <p><input type="file" name="file"></input></p>
+      <p><input type="submit" value="Submit"></input></p>
+    </form>
+      </div>}
       {status?.type === 'error' && <div style={{color: "White", padding: "15px"}}>Login failed</div>}</>
     </div>
   );
