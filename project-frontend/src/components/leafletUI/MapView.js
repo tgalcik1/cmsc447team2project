@@ -409,6 +409,8 @@ function DistrictDropdown(){
   })
 
   return(
+    <div>
+
     <div className="district_dropdown">
     <span className="text">District:</span>
     <select name="district" id="district" defaultValue="Arson" onChange={({ target: { value: radius } }) => {onChange(radius);}}>
@@ -424,29 +426,14 @@ function DistrictDropdown(){
       <option defaultValue="SOUTHEAST">SOUTHEAST</option>
     </select>
     </div>
+    </div>
   )
 }
 
-class MapView extends Component {
+function LeafletMap(){
   
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentLocation: { lat: 39.2904, lng: -76.6122 },
-      zoom: 13,
-      height: 1000
-    }
-  }
-  
-  render() {
-    return (
-      <body style={{backgroundSize: "200% 200%",
-      backgroundPosition: "0% 40%",
-      transition: "ease-out background-position 300ms",
-      backdropFilter: "blur(1.5rem)"}}>
-      <div>
-        <div id="map_wrapper">
-        <div id="map">
+  return (
+    <div id="map">
             <Map center={{lat: 39.2904, lng: -76.6122}} zoom={13} style={{
         height: 600 + "px",
         width: 1000 + "px",
@@ -471,6 +458,29 @@ class MapView extends Component {
                 }
             </Map>
             </div>
+  )
+}
+
+class MapView extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentLocation: { lat: 39.2904, lng: -76.6122 },
+      zoom: 13,
+      height: 1000
+    }
+  }
+  
+  render() {
+    return (
+      <body style={{backgroundSize: "200% 200%",
+      backgroundPosition: "0% 40%",
+      transition: "ease-out background-position 300ms",
+      backdropFilter: "blur(1.5rem)"}}>
+      <div>
+        <div id="map_wrapper">
+            <LeafletMap></LeafletMap>
             <Slider></Slider>
             <div></div>
           <div id="filters">
