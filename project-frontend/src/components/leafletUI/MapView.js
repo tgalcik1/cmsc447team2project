@@ -229,210 +229,37 @@ function Slider() {
       this.style.background = 'linear-gradient(to right, #ff2a5f 0%, #6b8dff, ' + value + '%, #fff ' + value + '%, #fff 100%)'
       value = this.value;
       year = this.value;
-
-      crime = [];
-      var jsonData = {"CrimeDateTime": year, "Description" : crime_type, "Gender": gender, "District": district}
-      console.log(jsonData);
-  
-      let setResp = this;
-      // Send data to the backend via POST
-      fetch('http://localhost:5000/getfilter/endpoint', {  // Enter your IP address here
-  
-        method: 'PUT', 
-        mode: 'cors', 
-        body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
-  
-      }).then(response => response.json()) 
-      .then(data => geo_data = data)
-      console.log(geo_data);
-  
-      for (let i = 0; i < geo_data.length; i++){
-        var tmp = [geo_data[i]["Latitude"], geo_data[i]["Longitude"]];
-        crime.push(tmp);
-      }
-      console.log(crime);
     }
   })
+
+  function onClick(e) {
+    crime = [];
+    var jsonData = {"CrimeDateTime": year, "Description" : crime_type, "Gender": gender, "District": district}
+    e.preventDefault();
+    console.log(jsonData);
+
+    let setResp = this;
+    // Send data to the backend via POST
+    fetch('http://localhost:5000/getfilter/endpoint', {  // Enter your IP address here
+
+      method: 'PUT', 
+      mode: 'cors', 
+      body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
+
+    }).then(response => response.json()) 
+    .then(data => geo_data = data)
+    .catch(error => console.log(error));
+    //console.log(geo_data);
+
+    for (let i = 0; i < geo_data.length; i++){
+      var tmp = [geo_data[i]["Latitude"], geo_data[i]["Longitude"]];
+      crime.push(tmp);
+    }
+    console.log(crime);
+  }
 
   return(
     <div>
-    <div className="dateslider">
-      <div className="defaultValue-container">
-        <span className="text">Year:</span>
-        <span id="date">{value}</span>
-      </div>
-      <input type="range" min="2018" max="2022" className="slider" value={value} onChange={({ target: { value: radius } }) => {onChange(radius);}} step="1" id="range"></input>
-    </div>
-    </div>
-  );
-}
-
-function CrimeTypeDropdown() {
-  const [value, onChange] = useState(null);
-  crime_type = value;
-
-  useEffect(()=>{
-    var slider = document.getElementById("crime_type").oninput = function(){
-      var value = (this.value-this.min)/(this.max-this.min)*100
-      this.style.background = 'linear-gradient(to right, #ff2a5f 0%, #6b8dff, ' + value + '%, #fff ' + value + '%, #fff 100%)'
-      value = this.value;
-      crime_type = this.value;
-
-      crime = [];
-      var jsonData = {"CrimeDateTime": year, "Description" : crime_type, "Gender": gender, "District": district}
-      console.log(jsonData);
-  
-      let setResp = this;
-      // Send data to the backend via POST
-      fetch('http://localhost:5000/getfilter/endpoint', {  // Enter your IP address here
-  
-        method: 'PUT', 
-        mode: 'cors', 
-        body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
-  
-      }).then(response => response.json()) 
-      .then(data => geo_data = data)
-      console.log(geo_data);
-  
-      for (let i = 0; i < geo_data.length; i++){
-        var tmp = [geo_data[i]["Latitude"], geo_data[i]["Longitude"]];
-        crime.push(tmp);
-      }
-      console.log(crime);
-    }
-  })
-
-  return(
-  
-  <div className="crime_type_dropdown">
-            <span className="text">Crime Type:</span>
-            <select name="crime_type" id="crime_type" defaultValue="Arson" onChange={({ target: { value: radius } }) => {onChange(radius);}}>
-              <option defaultValue="NULL">All Crimes</option>
-              <option defaultValue="AGG_ASSAULT">AGG_ASSAULT</option>
-              <option defaultValue="ARSON">ARSON</option>
-              <option defaultValue="AUTO_THEFT">AUTO_THEFT</option>
-              <option defaultValue="BURGLARY">BURGLARY</option>
-              <option defaultValue="COMMON_ASSAULT">COMMON_ASSAULT</option>
-              <option defaultValue="HOMICIDE">HOMICIDE</option>
-              <option defaultValue="LARCENY">LARCENY</option>
-              <option defaultValue="LARCENY_FROM_AUTO">LARCENY_FROM_AUTO</option>
-              <option defaultValue="RAPE">RAPE</option>
-              <option defaultValue="ROBBERY">ROBBERY</option>
-              <option defaultValue="ROBBERY_CARJACKING">ROBBERY_CARJACKING</option>
-              <option defaultValue="ROBBERY_COMMERCIAL">ROBBERY_COMMERCIAL</option>
-              <option defaultValue="SHOOTING">SHOOTING</option>
-            </select>
-          </div>
-  )
-}
-
-function GenderDropdown(){
-  const [value, onChange] = useState(null);
-  gender = value;
-
-  useEffect(()=>{
-    var slider = document.getElementById("gender").oninput = function(){
-      var value = (this.value-this.min)/(this.max-this.min)*100
-      this.style.background = 'linear-gradient(to right, #ff2a5f 0%, #6b8dff, ' + value + '%, #fff ' + value + '%, #fff 100%)'
-      value = this.value;
-      gender = this.value;
-
-      crime = [];
-      var jsonData = {"CrimeDateTime": year, "Description" : crime_type, "Gender": gender, "District": district}
-      console.log(jsonData);
-  
-      let setResp = this;
-      // Send data to the backend via POST
-      fetch('http://localhost:5000/getfilter/endpoint', {  // Enter your IP address here
-  
-        method: 'PUT', 
-        mode: 'cors', 
-        body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
-  
-      }).then(response => response.json()) 
-      .then(data => geo_data = data)
-      console.log(geo_data);
-  
-      for (let i = 0; i < geo_data.length; i++){
-        var tmp = [geo_data[i]["Latitude"], geo_data[i]["Longitude"]];
-        crime.push(tmp);
-      }
-      console.log(crime);
-    }
-  })
-
-  return(
-    <div className="gender_dropdown">
-    <span className="text">Sex:</span>
-    <select name="gender" id="gender" defaultValue="Arson" onChange={({ target: { value: radius } }) => {onChange(radius);}}>
-    <option defaultValue="all">All</option>
-      <option defaultValue="M">M</option>
-      <option defaultValue="F">F</option>
-    </select>
-    </div>
-  )
-}
-
-function DistrictDropdown(){
-  const [value, onChange] = useState(null);
-  district = value;
-
-  useEffect(()=>{
-    var slider = document.getElementById("district").oninput = function(){
-      var value = (this.value-this.min)/(this.max-this.min)*100
-      this.style.background = 'linear-gradient(to right, #ff2a5f 0%, #6b8dff, ' + value + '%, #fff ' + value + '%, #fff 100%)'
-      value = this.value;
-      district = this.value;
-
-      crime = [];
-      var jsonData = {"CrimeDateTime": year, "Description" : crime_type, "Gender": gender, "District": district}
-      console.log(jsonData);
-  
-      let setResp = this;
-      // Send data to the backend via POST
-      fetch('http://localhost:5000/getfilter/endpoint', {  // Enter your IP address here
-  
-        method: 'PUT', 
-        mode: 'cors', 
-        body: JSON.stringify(jsonData) // body data type must match "Content-Type" header
-  
-      }).then(response => response.json()) 
-      .then(data => geo_data = data)
-      console.log(geo_data);
-  
-      for (let i = 0; i < geo_data.length; i++){
-        var tmp = [geo_data[i]["Latitude"], geo_data[i]["Longitude"]];
-        crime.push(tmp);
-      }
-      console.log(crime);
-    }
-  })
-
-  return(
-    <div>
-
-    <div className="district_dropdown">
-    <span className="text">District:</span>
-    <select name="district" id="district" defaultValue="Arson" onChange={({ target: { value: radius } }) => {onChange(radius);}}>
-      <option defaultValue="All">All</option>
-      <option defaultValue="NORTHWEST">NORTHWEST</option>
-      <option defaultValue="NORTHERN">NORTHERN</option>
-      <option defaultValue="NORTHEAST">NORTHEAST</option>
-      <option defaultValue="WESTERN">WESTERN</option>
-      <option defaultValue="CENTRAL">CENTRAL</option>
-      <option defaultValue="EASTERN">EASTERN</option>
-      <option defaultValue="SOUTHWEST">SOUTHWEST</option>
-      <option defaultValue="SOUTHERN">SOUTHERN</option>
-      <option defaultValue="SOUTHEAST">SOUTHEAST</option>
-    </select>
-    </div>
-    </div>
-  )
-}
-
-function LeafletMap(){
-  
-  return (
     <div id="map">
             <Map center={{lat: 39.2904, lng: -76.6122}} zoom={13} style={{
         height: 600 + "px",
@@ -458,6 +285,82 @@ function LeafletMap(){
                 }
             </Map>
             </div>
+    <div className="dateslider">
+      <div className="defaultValue-container">
+        <span className="text">Year:</span>
+        <span id="date">{value}</span>
+      </div>
+      <input type="range" min="2018" max="2022" className="slider" value={value} onChange={({ target: { value: radius } }) => {onChange(radius);}} step="1" id="range"></input>
+    </div>
+    <form class='crimeform' onSubmit={onClick}>
+      <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+}
+
+function CrimeTypeDropdown() {
+  const [value, onChange] = useState(null);
+  crime_type = value;
+
+  return(<div className="crime_type_dropdown">
+            <span className="text">Crime Type:</span>
+            <select name="crime_type" id="crime_type" defaultValue="null" onChange={({ target: { value: radius } }) => {onChange(radius);}}>
+              <option defaultValue="NULL">null</option>
+              <option defaultValue="AGG_ASSAULT">AGG_ASSAULT</option>
+              <option defaultValue="ARSON">ARSON</option>
+              <option defaultValue="AUTO_THEFT">AUTO_THEFT</option>
+              <option defaultValue="BURGLARY">BURGLARY</option>
+              <option defaultValue="COMMON_ASSAULT">COMMON_ASSAULT</option>
+              <option defaultValue="HOMICIDE">HOMICIDE</option>
+              <option defaultValue="LARCENY">LARCENY</option>
+              <option defaultValue="LARCENY_FROM_AUTO">LARCENY_FROM_AUTO</option>
+              <option defaultValue="RAPE">RAPE</option>
+              <option defaultValue="ROBBERY">ROBBERY</option>
+              <option defaultValue="ROBBERY_CARJACKING">ROBBERY_CARJACKING</option>
+              <option defaultValue="ROBBERY_COMMERCIAL">ROBBERY_COMMERCIAL</option>
+              <option defaultValue="SHOOTING">SHOOTING</option>
+            </select>
+          </div>
+  )
+}
+
+function GenderDropdown(){
+  const [value, onChange] = useState(null);
+  gender = value;
+
+  return(
+    <div className="gender_dropdown">
+    <span className="text">Sex:</span>
+    <select name="gender" id="gender" defaultValue="null" onChange={({ target: { value: radius } }) => {onChange(radius);}}>
+    <option defaultValue="all">null</option>
+      <option defaultValue="M">M</option>
+      <option defaultValue="F">F</option>
+    </select>
+    </div>
+  )
+}
+
+function DistrictDropdown(){
+  const [value, onChange] = useState(null);
+  district = value;
+
+  return(
+    <div className="district_dropdown">
+    <span className="text">District:</span>
+    <select name="district" id="district" defaultValue="null" onChange={({ target: { value: radius } }) => {onChange(radius);}}>
+      <option defaultValue="All">null</option>
+      <option defaultValue="NORTHWEST">NORTHWEST</option>
+      <option defaultValue="NORTHERN">NORTHERN</option>
+      <option defaultValue="NORTHEAST">NORTHEAST</option>
+      <option defaultValue="WESTERN">WESTERN</option>
+      <option defaultValue="CENTRAL">CENTRAL</option>
+      <option defaultValue="EASTERN">EASTERN</option>
+      <option defaultValue="SOUTHWEST">SOUTHWEST</option>
+      <option defaultValue="SOUTHERN">SOUTHERN</option>
+      <option defaultValue="SOUTHEAST">SOUTHEAST</option>
+    </select>
+    </div>
   )
 }
 
@@ -480,7 +383,6 @@ class MapView extends Component {
       backdropFilter: "blur(1.5rem)"}}>
       <div>
         <div id="map_wrapper">
-            <LeafletMap></LeafletMap>
             <Slider></Slider>
             <div></div>
           <div id="filters">
