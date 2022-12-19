@@ -11,15 +11,18 @@ import {
 const Navbar = () => {
   return (
     <>
+    <div id="header">
+          <span className="text">Baltimore COVID-19 and Crime Data Visualizer</span>
+        </div>
       <Nav>
         <Bars />
   
         <NavMenu>
         <NavLink to='/crimedata'>
-            CrimeData
+            Crime Data
           </NavLink>
           <NavLink to='/coviddata'>
-            CovidData
+            COVID Data
           </NavLink>
           <NavLink to='/about'>
             About
