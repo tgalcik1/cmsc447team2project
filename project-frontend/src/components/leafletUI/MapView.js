@@ -336,7 +336,6 @@ function GenderDropdown(){
     <option defaultValue="all">All</option>
       <option defaultValue="M">M</option>
       <option defaultValue="F">F</option>
-      <option defaultValue="unspecified">Unspecified</option>
     </select>
     </div>
   )
@@ -360,7 +359,6 @@ function DistrictDropdown(){
       <option defaultValue="SOUTHWEST">SOUTHWEST</option>
       <option defaultValue="SOUTHERN">SOUTHERN</option>
       <option defaultValue="SOUTHEAST">SOUTHEAST</option>
-      <option defaultValue="unspecified">Unspecified</option>
     </select>
     </div>
   )
@@ -384,14 +382,6 @@ class MapView extends Component {
       transition: "ease-out background-position 300ms",
       backdropFilter: "blur(1.5rem)"}}>
       <div>
-        <div id="header">
-          <span className="text">Baltimore COVID-19 and Crime Data Visualizer</span>
-        </div>
-
-        <div id="about">
-          <span className="text">About</span>
-        </div>
-
         <div id="map_wrapper">
             <Slider></Slider>
             <div></div>
