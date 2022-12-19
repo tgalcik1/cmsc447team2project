@@ -303,6 +303,10 @@ function CrimeTypeDropdown() {
   const [value, onChange] = useState(null);
   crime_type = value;
 
+  if (value == "null"){
+    crime_type = null;
+  }
+
   return(<div className="crime_type_dropdown">
             <span className="text">Crime Type:</span>
             <select name="crime_type" id="crime_type" defaultValue="null" onChange={({ target: { value: radius } }) => {onChange(radius);}}>
@@ -329,6 +333,10 @@ function GenderDropdown(){
   const [value, onChange] = useState(null);
   gender = value;
 
+  if (value == "null"){
+    gender = null;
+  }
+
   return(
     <div className="gender_dropdown">
     <span className="text">Sex:</span>
@@ -344,6 +352,10 @@ function GenderDropdown(){
 function DistrictDropdown(){
   const [value, onChange] = useState(null);
   district = value;
+
+  if (value == "null"){
+    district = null;
+  }
 
   return(
     <div className="district_dropdown">

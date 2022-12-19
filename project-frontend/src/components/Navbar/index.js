@@ -19,10 +19,10 @@ const Navbar = () => {
   
         <NavMenu>
         <NavLink to='/crimedata'>
-            Crime Data
+            Heatmap
           </NavLink>
           <NavLink to='/coviddata'>
-            COVID Data
+            Graphs
           </NavLink>
           <NavLink to='/about'>
             About

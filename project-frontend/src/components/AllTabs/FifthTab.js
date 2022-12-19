@@ -51,7 +51,7 @@ const FifthTab = () => {
   <h3>Baltimore Crime Data Per Month</h3>
   </div>
       <LineChart
-          width={1800}
+          width={1500}
           height={400}
           data={data2022}
           
@@ -78,7 +78,7 @@ const FifthTab = () => {
             <div>Baltimore Crime Data This Year</div>
         </div>
         <BarChart
-          width={1800}
+          width={1500}
           height={500}
           data={crime2022}
           margin={{

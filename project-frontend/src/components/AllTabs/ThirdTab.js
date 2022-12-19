@@ -52,7 +52,7 @@ const ThirdTab = () => {
   <h3 style={{color: "White"}}>Baltimore Crime Data Per Month</h3>
   </div>
       <LineChart
-          width={1800}
+          width={1500}
           height={400}
           data={data2020}
           
@@ -79,7 +79,7 @@ const ThirdTab = () => {
             <h3 style={{color: "White"}}>Baltimore Crime Data This Year</h3>
         </div>
         <BarChart
-          width={1800}
+          width={1500}
           height={500}
           data={crime2020}
           margin={{
